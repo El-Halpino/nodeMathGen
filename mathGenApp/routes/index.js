@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var router = express.Router();
 
 function createMathObj(){
@@ -42,7 +43,7 @@ router.get('/', function(req, res, next) {
     req.session.hasOwnProperty("mathGame")
   )
   {
-    correctAns = checkAnswers();
+    correctAns = checkAnswers(req.query,);
     delete req.session.mathGame;
     res.render("result", correctAns)
   }
