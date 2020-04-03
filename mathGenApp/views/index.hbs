@@ -1,2 +1,18 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<form action="/">
+    <table style="width:50%">
+        <tr>
+            <th>Operand1</th>
+            <th>Operand2</th>
+            <th>Add</th>
+        </tr>
+        {{#each numberList}}
+        <tr>
+            <td>{{this.randomNumber1}}</td>
+            <td>{{this.randomNumber2}}</td>
+            <td><input name="answer_{{this.index}}" type="number"></input></td>
+        </tr>
+        {{/each}}
+    </table>
+    <input type="submit" value="Submit">
+</form>
