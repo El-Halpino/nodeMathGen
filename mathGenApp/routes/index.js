@@ -46,8 +46,9 @@ router.get('/', function(req, res, next) {
     mathGame = req.session.mathGame;
     answers = req.query;
     correctAns = checkAnswers(answers, mathGame);
+    console.log(correctAns);
     delete req.session.mathGame;
-    res.render("result", correctAns);
+    res.render("result", {result: correctAns} );
   }
   else if (!req.session.hasOwnProperty("mathGame")) {
   newMathSheet = createMathObj();
