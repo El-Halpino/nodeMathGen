@@ -19,6 +19,7 @@ function createMathObj(){
 
 function checkAnswers(req){
   console.log(req.query); // this is probably an answer, since we have data in the in session and the req.query
+  console.log(JSON.stringify(req.session.mathGame.numberList.length))
   var gameLength = req.session.mathGame.numberList.length;
   console.log(gameLength);
   var correctAnswerCount = 0;
@@ -30,7 +31,7 @@ function checkAnswers(req){
     if (op1 + op2 == answerToCheck) {
       correctAnswerCount++;
     }
- // delete req.session.mathGame;
+  delete req.session.mathGame;
   }
   return correctAnswerCount;
 }
@@ -43,7 +44,7 @@ router.get('/', function(req, res, next) {
     req.session.hasOwnProperty("mathGame")
   )
   {
-    correctAns = checkAnswers(req.query,);
+    correctAns = checkAnswers(req.query, newMathSheet);
     delete req.session.mathGame;
     res.render("result", correctAns)
   }
