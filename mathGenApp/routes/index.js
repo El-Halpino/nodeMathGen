@@ -5,7 +5,7 @@ var router = express.Router();
 function createMathObj(){
   var newMathGame = {
     title: "Addition",
-    numberList: []
+    numberList: [] //initialise list
   };
   for (var i = 0; i < 10; i++) {
     newMathGame.numberList.push({
@@ -14,24 +14,23 @@ function createMathObj(){
       randomNumber2: Math.round(Math.random() * 50)
     });
   }
-  return newMathGame;
+  return newMathGame; //return new math obj
 }
 
 function checkAnswers(req){
   console.log(req.query); // this is probably an answer, since we have data in the in session and the req.query
-  console.log(JSON.stringify(req.session.mathGame.numberList.length))
-  var gameLength = req.session.mathGame.numberList.length;
+  var gameLength = mathGame.numberList.length;
   console.log(gameLength);
   var correctAnswerCount = 0;
   for (let index = 0; index < gameLength; index++) {
-    const question = req.session.mathGame.numberList[index];
+    const question = mathGame.numberList[index];
+    console.log(JSON.stringify(mathGame.numberList[index]))
     var op1 = parseInt(question.randomNumber1, 10);
     var op2 = parseInt(question.randomNumber2, 10);
-    var answerToCheck = req.query["answer_" + index];
+    var answerToCheck = req.query["answer_" + index]; //Error here, 'answer_0' of undefined
     if (op1 + op2 == answerToCheck) {
       correctAnswerCount++;
     }
-  delete req.session.mathGame;
   }
   return correctAnswerCount;
 }
@@ -44,7 +43,8 @@ router.get('/', function(req, res, next) {
     req.session.hasOwnProperty("mathGame")
   )
   {
-    correctAns = checkAnswers(req.query, newMathSheet);
+    mathGame = req.session.mathGame
+    correctAns = checkAnswers(req.query, mathGame);
     delete req.session.mathGame;
     res.render("result", correctAns)
   }
