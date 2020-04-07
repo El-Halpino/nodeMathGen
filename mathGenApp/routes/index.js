@@ -27,7 +27,7 @@ function checkAnswers(req){
     console.log(JSON.stringify(mathGame.numberList[index]))
     var op1 = parseInt(question.randomNumber1, 10);
     var op2 = parseInt(question.randomNumber2, 10);
-    var answerToCheck = answers["answer_" + index]; //Error here, 'answer_0' of undefined
+    var answerToCheck = answers["answer_" + index];
     if (op1 + op2 == answerToCheck) {
       correctAnswerCount++;
     }
@@ -43,9 +43,10 @@ router.get('/', function(req, res, next) {
     req.session.hasOwnProperty("mathGame")
   )
   {
+    console.log(req.session.MathGame);
     mathGame = req.session.mathGame;
     answers = req.query;
-    correctAns = checkAnswers(answers, mathGame);
+    var correctAns = checkAnswers();
     console.log(correctAns);
     delete req.session.mathGame;
     res.render("result", {result: correctAns} );
@@ -53,6 +54,7 @@ router.get('/', function(req, res, next) {
   else if (!req.session.hasOwnProperty("mathGame")) {
   newMathSheet = createMathObj();
   req.session.mathGame = newMathSheet;
+  console.log(req.session.MathGame);
   res.render('index', newMathSheet);
   }
   else {
