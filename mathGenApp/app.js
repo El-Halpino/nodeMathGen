@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var reDRouter = require('./routes/redirect');
 var homeRouter = require('./routes/home');
+var configWorksheetRouter = require('./routes/configWorksheet');
 var worksheetRouter = require('./routes/worksheet');
 
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', reDRouter);
 app.use('/', homeRouter);
+app.use('/', configWorksheetRouter);
 app.use('/', worksheetRouter);
 
 // catch 404 and forward to error handler

@@ -1,0 +1,21 @@
+<h1>{{title}}</h1>
+<form action="/configWorksheet">
+    <label for="topics">Select Worksheet Topic:</label>
+    <select id="topics" name="topics" required>
+        <option value="Addition">Addition</option>
+        <option value="Subtraction">Subtraction</option>
+        <option value="Multiplication">Multiplication</option>
+        <option value="Division">Division</option>
+    </select>
+    <br>
+    <label for="questions">Number of Questions:</label>
+    <input type="number" name="questions" min="1" max="100" required>
+    <br>
+    <label for="min">Min Value Generated</label>
+    <input type="number" name="minV" min="0" max="1000" required>
+    <br>
+    <label for="max">Max Value Generated</label>
+    <input type="number" name="max" min="minV" max="1000" required>
+    <br>
+    <input type="submit" value="submit">
+</form>

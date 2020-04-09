@@ -12,3 +12,8 @@ table,
     td {
         border: 1px solid black;
     }
+
+input[type=number] {
+   width: 80px;
+}
+  
