@@ -35,8 +35,8 @@ function checkAnswers(req){
   return correctAnswerCount;
 }
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+/* GET worksheet page. */
+router.get('/worksheet', function(req, res, next) {
   if (!(
       Object.keys(req.query).length === 0 && req.query.constructor === Object
     ) &&
@@ -55,10 +55,10 @@ router.get('/', function(req, res, next) {
   newMathSheet = createMathObj();
   req.session.mathGame = newMathSheet;
   console.log(req.session.MathGame);
-  res.render('index', newMathSheet);
+  res.render('worksheet', newMathSheet);
   }
   else {
-    res.render("index", req.session.mathGame);
+    res.render("worksheet", req.session.mathGame);
   }
 });
 
