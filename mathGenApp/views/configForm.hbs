@@ -1,4 +1,5 @@
 <h1>{{title}}</h1>
+<p>
 <form action="/configWorksheet">
     <label for="topics">Select Worksheet Topic:</label>
     <select id="topics" name="topics" required>
@@ -11,11 +12,15 @@
     <label for="questions">Number of Questions:</label>
     <input type="number" name="questions" min="1" max="100" required>
     <br>
-    <label for="min">Min Value Generated</label>
-    <input type="number" name="minV" min="0" max="1000" required>
-    <br>
-    <label for="max">Max Value Generated</label>
+    <label for="max">Max Values Generated:</label>
     <input type="number" name="max" min="minV" max="1000" required>
     <br>
-    <input type="submit" value="submit">
+    <input type="submit" value="Generate Worksheet">
 </form>
+<button onclick="loadHome()">Home</button>
+</p>
+<script>
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

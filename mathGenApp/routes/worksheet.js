@@ -2,16 +2,16 @@ var express = require('express');
 var session = require('express-session');
 var router = express.Router();
 
-function createMathObj(){
+function createMathObj(options){ // topics , noOfQuestions, maxValue
   var newMathGame = {
-    title: "Addition",
+    title: options["topic"],
     numberList: [] //initialise list
   };
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < options["noOfQuestions"]; i++) {
     newMathGame.numberList.push({
       index: i,
-      randomNumber1: Math.round(Math.random() * 50),
-      randomNumber2: Math.round(Math.random() * 50)
+      randomNumber1: Math.round(Math.random() * options["maxValue"]),
+      randomNumber2: Math.round(Math.random() * options["maxValue"])
     });
   }
   return newMathGame; //return new math obj
@@ -41,7 +41,7 @@ router.get('/worksheet', function(req, res, next) {
       Object.keys(req.query).length === 0 && req.query.constructor === Object
     ) &&
     req.session.hasOwnProperty("mathGame")
-  )
+  ) //if there are answers do ;
   {
     console.log(req.session.MathGame);
     mathGame = req.session.mathGame;
@@ -52,9 +52,10 @@ router.get('/worksheet', function(req, res, next) {
     res.render("result", {result: correctAns} );
   }
   else if (!req.session.hasOwnProperty("mathGame")) {
-  newMathSheet = createMathObj();
-  req.session.mathGame = newMathSheet;
-  console.log(req.session.MathGame);
+  console.clear();
+  var options = req.session.worksheetOptions
+  console.log(JSON.stringify(options)); 
+  newMathSheet = createMathObj(options);
   res.render('worksheet', newMathSheet);
   }
   else {
