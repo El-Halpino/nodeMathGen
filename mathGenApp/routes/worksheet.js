@@ -18,25 +18,11 @@ function createMathObj(options){ // topics , noOfQuestions, maxValue
 }
 
 function checkAnswers(answers, mathGame, operator){
-  switch(operator){
-    case 'Addition':
-      operator = '+';
-    break;
-    case 'Subtraction':
-      operator = '-';
-    break;
-    case 'Multiplication':
-      operator = '*';
-    break;
-    case 'Division':
-      operator = '/';
-    break;
-  }
   var operators = {
-    '+': function(a, b) { return a + b},
-    '-': function(a, b) { return a - b},
-    '*': function(a, b) { return a * b},
-    '/': function(a, b) { return a / b}
+    'Addition': function(a, b) { return a + b},
+    'Subtraction': function(a, b) { return a - b},
+    'Multiplication': function(a, b) { return a * b},
+    'Division': function(a, b) { return a / b}
   }
   console.log(answers); 
   var gameLength = mathGame.numberList.length;
@@ -58,7 +44,7 @@ function checkAnswers(answers, mathGame, operator){
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
-  if (req.session.hasOwnProperty("mathGame"))//if there is already a math game...;
+  if (req.session.hasOwnProperty("mathGame"))//if there is already a math game...
   {
     var mathGame = req.session.mathGame;
     var answers = req.query;

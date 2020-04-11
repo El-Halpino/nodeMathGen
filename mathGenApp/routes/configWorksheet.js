@@ -4,7 +4,6 @@ var router = express.Router();
 
 /* GET ConfigWorksheet page. */
 router.get('/configWorksheet', function(req, res, next) {
-   
     if (req.session.formLoaded == true)
       {
         console.log(req.query);
