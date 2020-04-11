@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,6 +17,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "jest": "^25.3.0",
     "nodemon": "^2.0.2"
   }
 }
