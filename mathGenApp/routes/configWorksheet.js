@@ -15,6 +15,7 @@ router.get('/configWorksheet', function(req, res, next) {
         }
         console.log("Helo" ,JSON.stringify(configOptions));
         req.session.worksheetOptions = configOptions;
+        delete req.session.formLoaded;
         res.redirect("/worksheet");
       }
       else {

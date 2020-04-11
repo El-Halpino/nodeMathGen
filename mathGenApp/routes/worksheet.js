@@ -17,8 +17,28 @@ function createMathObj(options){ // topics , noOfQuestions, maxValue
   return newMathGame; //return new math obj
 }
 
-function checkAnswers(req){
-  console.log(answers); // this is probably an answer, since we have data in the in session and the req.query
+function checkAnswers(answers, mathGame, operator){
+  switch(operator){
+    case 'Addition':
+      operator = '+';
+    break;
+    case 'Subtraction':
+      operator = '-';
+    break;
+    case 'Multiplication':
+      operator = '*';
+    break;
+    case 'Division':
+      operator = '/';
+    break;
+  }
+  var operators = {
+    '+': function(a, b) { return a + b},
+    '-': function(a, b) { return a - b},
+    '*': function(a, b) { return a * b},
+    '/': function(a, b) { return a / b}
+  }
+  console.log(answers); 
   var gameLength = mathGame.numberList.length;
   console.log(gameLength);
   var correctAnswerCount = 0;
@@ -28,7 +48,8 @@ function checkAnswers(req){
     var op1 = parseInt(question.randomNumber1, 10);
     var op2 = parseInt(question.randomNumber2, 10);
     var answerToCheck = answers["answer_" + index];
-    if (op1 + op2 == answerToCheck) {
+    console.log('result = ', operators[operator](op1,op2), ' answer = ', answerToCheck);
+    if (operators[operator](op1,op2) == answerToCheck) {
       correctAnswerCount++;
     }
   }
@@ -37,29 +58,24 @@ function checkAnswers(req){
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
-  if (!(
-      Object.keys(req.query).length === 0 && req.query.constructor === Object
-    ) &&
-    req.session.hasOwnProperty("mathGame")
-  ) //if there are answers do ;
+  if (req.session.hasOwnProperty("mathGame"))//if there is already a math game...;
   {
-    console.log(req.session.MathGame);
-    mathGame = req.session.mathGame;
-    answers = req.query;
-    var correctAns = checkAnswers();
+    var mathGame = req.session.mathGame;
+    var answers = req.query;
+    var operator = req.session.worksheetOptions['topic'];
+    var correctAns = checkAnswers(answers, mathGame, operator);
     console.log(correctAns);
     delete req.session.mathGame;
+    delete req.session.worksheetOptions;
     res.render("result", {result: correctAns} );
   }
-  else if (!req.session.hasOwnProperty("mathGame")) {
+  else if (!req.session.hasOwnProperty("mathGame")) { //if there isnt a math game
   console.clear();
   var options = req.session.worksheetOptions
   console.log(JSON.stringify(options)); 
-  newMathSheet = createMathObj(options);
+  var newMathSheet = createMathObj(options);
+  req.session.mathGame = newMathSheet;
   res.render('worksheet', newMathSheet);
-  }
-  else {
-    res.render("worksheet", req.session.mathGame);
   }
 });
 
