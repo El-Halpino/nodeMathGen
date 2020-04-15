@@ -1,5 +1,21 @@
-<h1>You got {{result}} correct </h1>
+<h1>{{title}}</h1>
+ <table style="width:50%">
+        <tr>
+            <th>Operand1</th>
+            <th>Operand2</th>
+            <th>Answer</th>
+        </tr>
+        {{#each numberList}}
+        <tr>
+            <td>{{this.randomNumber1}}</td>
+            <td>{{this.randomNumber2}}</td>
+            <td>{{this.answer}}</td>
+        </tr>
+        {{/each}}
+    </table>
 <p>
+    You got {{answerCount}} correct out of {{gameLength}}
+    <br>
     <button onclick="loadHome()">Return to Home</button>
 </p>
 <script>
