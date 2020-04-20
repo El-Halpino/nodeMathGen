@@ -1,1 +1,14 @@
-{{ title}}
+<p>
+<ol>
+    {{#each customers}}
+    <li>{{this.name}}, {{this.address}}</li>
+    {{#/each}}
+</ol>    
+<br>
+<button onclick="loadHome()">Home</button>    
+</p>
+<script>
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

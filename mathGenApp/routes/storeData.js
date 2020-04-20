@@ -13,12 +13,15 @@ router.get('/storeData', function(req, res, next) {
     var myobj = { name: "Company Inc", address: "Highway 37"};
     dbo.collection("customers").insertOne(myobj, function(err,res) {
         if (err) throw err;
-        console.log("1 document inserted")
+        console.log("1 document inserted");
         db.close();
         });
+    dbo.collection("customers").find().toArray()
+        .then(results => {
+         res.render("dataStored", {customers: results});   
+        })
     });
-
-    res.render("dataStored", {title: "Your Data Has Been Stored"});
+   // res.render("dataStored", {title: "Your Data Has Been Stored"});
 });
   
   module.exports = router;
