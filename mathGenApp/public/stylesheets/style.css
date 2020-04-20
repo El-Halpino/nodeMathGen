@@ -6,6 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+table { 
+  width: 25%;
+}
 
 table,
     th,
@@ -14,7 +17,18 @@ table,
         text-align: center;
     }
 
+th {
+    height: 50px;
+    background-color: #4CAF50;
+    color: white;
+  }
+
 input[type=number] {
    width: 80px;
 }
+
+.align-left {
+  margin-left:5em;
+}
+
   

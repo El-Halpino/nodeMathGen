@@ -1,3 +1,4 @@
+const workSheet = require("../models/worksheetSession.js");
 
 describe("Create Math Object Function", () => {
     test("It should return an object with a topic and list of numbers", () => {
@@ -13,7 +14,7 @@ describe("Create Math Object Function", () => {
                     {"index":4,"randomNumber1":0,"randomNumber2":1}]
                 }
 
-        expect(createMathObj(input)).toEqual(output);
+        expect(workSheet.createMathObj(input)).toEqual(output);
 
     });
-});
+}); //jest

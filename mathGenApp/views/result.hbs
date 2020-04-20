@@ -1,23 +1,46 @@
 <h1>{{title}}</h1>
- <table style="width:50%">
+<style>
+    table {
+        float:left;
+    }
+</style>
+ <table>
         <tr>
             <th>Operand1</th>
             <th>Operand2</th>
-            <th>Answer</th>
         </tr>
-        {{#each numberList}}
+        {{#each questions}}
         <tr>
             <td>{{this.randomNumber1}}</td>
             <td>{{this.randomNumber2}}</td>
-            <td>{{this.answer}}</td>
-        </tr>
+        </tr>    
         {{/each}}
-    </table>
-<p>
+</table>
+ <table>
+        <tr>
+            <th>Answer</th>
+        </tr>
+        {{#each answers}}
+        <tr>
+            <td>{{this.answer}}</td>
+        </tr>    
+        {{/each}}
+</table>
+<table>
+        <tr>
+            <th>Result</th>
+        </tr>
+        {{#each calculatedAnswers}}
+        <tr>
+            <td>{{this.answer}}</td>
+        </tr>    
+        {{/each}}      
+</table>
+<div style="position: relative"><p style="position: fixed; bottom: 0; width:100%; text-align: left">
     You got {{answerCount}} correct out of {{gameLength}}
     <br>
     <button onclick="loadHome()">Return to Home</button>
-</p>
+</p></div>
 <script>
     function loadHome() {
         location.replace("/home")
