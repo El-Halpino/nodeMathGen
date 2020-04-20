@@ -18,8 +18,15 @@ router.get('/storeData', function(req, res, next) {
         });
     dbo.collection("customers").find().toArray()
         .then(results => {
-         res.render("dataStored", {customers: results});   
+            var customerLog = {
+                results: results,
+                title: "Your Data has been stored"
+            }
+            console.log("Hello");
+            console.log(results);
+         res.render("dataStored", customerLog);   
         })
+        .catch(error => console.error(error));
     });
    // res.render("dataStored", {title: "Your Data Has Been Stored"});
 });

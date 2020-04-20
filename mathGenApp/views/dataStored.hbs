@@ -1,8 +1,9 @@
+<h1>{{title}}</h1>
 <p>
 <ol>
-    {{#each customers}}
+    {{#each results}}
     <li>{{this.name}}, {{this.address}}</li>
-    {{#/each}}
+    {{/each}}
 </ol>    
 <br>
 <button onclick="loadHome()">Home</button>    
