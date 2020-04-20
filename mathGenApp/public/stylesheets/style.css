@@ -8,6 +8,7 @@ a {
 }
 table { 
   width: 25%;
+  table-layout: fixed;
 }
 
 table,
@@ -18,7 +19,7 @@ table,
     }
 
 th {
-    height: 50px;
+    height: 50;
     background-color: #4CAF50;
     color: white;
   }

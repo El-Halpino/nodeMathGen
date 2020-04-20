@@ -3,7 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var mongo = require('mongodb'); 
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/nodeTest1');
 var logger = require('morgan');
 
 //routes
@@ -11,11 +13,11 @@ var reDRouter = require('./routes/redirect');
 var homeRouter = require('./routes/home');
 var configWorksheetRouter = require('./routes/configWorksheet');
 var worksheetRouter = require('./routes/worksheet');
-
+var storeDatatRouter = require('./routes/storeData');
 
 var app = express();
 
-// view engine setup
+// view engine setup Defime where to find views, and view type (handlebars)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -26,10 +28,18 @@ app.use(cookieParser());
 app.use(session({secret: "dont_reveal"}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Make db accessible to router
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
 app.use('/', reDRouter);
 app.use('/', homeRouter);
 app.use('/', configWorksheetRouter);
 app.use('/', worksheetRouter);
+app.use('/', storeDatatRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
