@@ -1,11 +1,11 @@
 <h1>{{title}}</h1>
 <p><button onclick="loadConfigWorksheet()">Configure Worksheet</button>
-<button onclick="sendDb()">Send Db</button></p>
+<button onclick="loadWorksheetList()">View Worksheets</button></p>
 <p>
 </p>
 <script>
-    function sendDb() {
-        location.replace("/storeData")
+    function loadWorksheetList() {
+        location.replace("/viewWorksheets")
     }
     function loadConfigWorksheet() {
         location.replace("/configWorksheet")

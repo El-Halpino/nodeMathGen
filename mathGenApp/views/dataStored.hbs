@@ -1,8 +1,10 @@
-<h1>{{title}}</h1>
+<h1>Worksheets Stored on MongoDB</h1>
 <p>
 <ol>
-    {{#each results}}
-    <li>{{this.name}}, {{this.address}}</li>
+    {{#each worksheets}}
+    <li>Worksheet ID: {{this._id}} <br>
+        Worksheet Name: {{this.name}}</li>
+    <button name="worksheet_{{this._id}}" onclick="loadWorksheet()">Render Worksheet</button>
     {{/each}}
 </ol>    
 <br>

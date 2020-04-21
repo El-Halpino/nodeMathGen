@@ -36,7 +36,9 @@ router.get('/worksheet', function(req, res, next) {
   var options = req.session.worksheetOptions
   var newMathSheet = workSheet.createMathObj(options); // create math game, math object returned
   req.session.mathGame = newMathSheet; // assign to session variable
-  res.render('worksheet', newMathSheet);
+  console.log(newMathSheet);
+  res.redirect('/storeData');
+  //res.render('worksheet', newMathSheet);
   }
 });   
 
