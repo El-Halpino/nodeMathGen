@@ -9,7 +9,6 @@ const workSheet = require("../models/worksheetSession.js");
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
-
   if (req.session.worksheetLoaded == true) {
 
     delete req.session.worksheetLoaded;
@@ -17,9 +16,9 @@ router.get('/worksheet', function(req, res, next) {
   else 
   {
     console.clear();
-    workSheetID = req.query;
-    console.log(workSheetID._id);
     req.session.worksheetLoaded = true;
+    var workSheetID = req.query;
+    console.log(workSheetID._id);
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("appDB");
@@ -27,9 +26,14 @@ router.get('/worksheet', function(req, res, next) {
       dbo.collection("worksheets").find(query).toArray(function(err, result) {
         if (err) throw err;
         console.log(result);
-        Object.assign({}, result);
         db.close();
-        res.render("worksheet",result);
+        var worksheetObj = {
+          "_id": result._id,
+          "name": result.name,
+          "topic": result.topic,
+          "numberList": result.numberList
+        }
+        res.render('worksheet', worksheetObj);
       });
     }); 
   }
