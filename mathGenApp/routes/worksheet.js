@@ -1,16 +1,47 @@
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
-var mongo = require('mongodb');
-
+var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId; 
+var url = "mongodb://localhost:27017/";
 
 const workSheet = require("../models/worksheetSession.js");
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
-  if (req.session.hasOwnProperty("mathGame"))//if there is already a math game...
+
+  if (req.session.worksheetLoaded == true) {
+
+    delete req.session.worksheetLoaded;
+  }
+  else 
   {
-    var mathGame = req.session.mathGame;
+    console.clear();
+    workSheetID = req.query;
+    console.log(workSheetID._id);
+    req.session.worksheetLoaded = true;
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("appDB");
+      var query = {"_id" : ObjectId(workSheetID._id)};
+      dbo.collection("worksheets").find(query).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        Object.assign({}, result);
+        db.close();
+        res.render("worksheet",result);
+      });
+    }); 
+  }
+});   
+
+module.exports = router;
+
+// ObjectId("5ea09f7562dce42835ba1d3d")
+
+
+/*
+var mathGame = req.session.mathGame;
     var operator = req.session.worksheetOptions['topic'];
     var answers = req.query;
     var answerObj = workSheet.checkAnswers(answers, mathGame, operator); // Number of correct answers returned
@@ -30,16 +61,4 @@ router.get('/worksheet', function(req, res, next) {
     }
     req.session.destroy(); // clear session variables
     res.render("result", gameDetails);
-  } 
-  else if (!req.session.hasOwnProperty("mathGame")) { //if there isnt a math game
-  console.clear();
-  var options = req.session.worksheetOptions
-  var newMathSheet = workSheet.createMathObj(options); // create math game, math object returned
-  req.session.mathGame = newMathSheet; // assign to session variable
-  console.log(newMathSheet);
-  res.redirect('/storeData');
-  //res.render('worksheet', newMathSheet);
-  }
-});   
-
-module.exports = router;
+*/

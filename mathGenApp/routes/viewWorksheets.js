@@ -7,7 +7,6 @@ var url = "mongodb://localhost:27017/";
 
 /* GET viewWorksheets page. */
 router.get('/viewWorksheets', function(req, res, next) {
-
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -16,7 +15,7 @@ router.get('/viewWorksheets', function(req, res, next) {
             console.log(JSON.stringify(result));
             db.close();
             res.render("dataStored",{worksheets: result});
-        })     
+        })
         //.catch(error => console.error(error));
     });
 });

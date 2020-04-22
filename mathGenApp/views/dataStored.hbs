@@ -1,12 +1,15 @@
 <h1>Worksheets Stored on MongoDB</h1>
 <p>
+<form action="/worksheet">
 <ol>
     {{#each worksheets}}
-    <li>Worksheet ID: {{this._id}} <br>
-        Worksheet Name: {{this.name}}</li>
-    <button name="worksheet_{{this._id}}" onclick="loadWorksheet()">Render Worksheet</button>
+    <li>Worksheet Name: {{this.name}}<br>
+        Worksheet Topic: {{this.topic}}</li>
+        Worksheet ID: {{this._id}} <br>
+    <button name="_id" type="submit" value={{this._id}}>Render Worksheet</button>
     {{/each}}
-</ol>    
+</ol>
+</form>
 <br>
 <button onclick="loadHome()">Home</button>    
 </p>

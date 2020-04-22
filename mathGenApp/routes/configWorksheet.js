@@ -1,5 +1,8 @@
 var express = require('express');
+var session = require('express-session');
 var router = express.Router();
+
+const workSheet = require("../models/worksheetSession.js");
 
 /* GET ConfigWorksheet page. */
 router.get('/configWorksheet', function(req, res, next) {
@@ -8,13 +11,17 @@ router.get('/configWorksheet', function(req, res, next) {
         console.log(req.query);
         var configOptions = {
             topic: req.query['topics'],
+            name: req.query['name'],
             noOfQuestions: req.query['questions'],
             maxValue: req.query['max']
         }
         console.log("Hello" ,JSON.stringify(configOptions));
         req.session.worksheetOptions = configOptions;
+        var newMathSheet = workSheet.createMathObj(configOptions); // create math game, math object returned
+        req.session.mathGame = newMathSheet; // assign to session variable
+        console.log(newMathSheet);
         delete req.session.formLoaded;
-        res.redirect("/worksheet");
+        res.redirect('/storeData');
       }
       else { // If Page hasn't been loaded...
         console.clear();
