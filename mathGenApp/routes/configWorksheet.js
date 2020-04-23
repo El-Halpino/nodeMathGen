@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var router = express.Router();
 
-const workSheet = require("../models/worksheetSession.js");
+const mathFunction = require("../models/worksheetSession.js");
 
 /* GET ConfigWorksheet page. */
 router.get('/configWorksheet', function(req, res, next) {
@@ -17,7 +17,7 @@ router.get('/configWorksheet', function(req, res, next) {
         }
         console.log("Hello" ,JSON.stringify(configOptions));
         req.session.worksheetOptions = configOptions;
-        var newMathSheet = workSheet.createMathObj(configOptions); // create math game, math object returned
+        var newMathSheet = mathFunction.createMathObj(configOptions); // create math game, math object returned
         req.session.mathGame = newMathSheet; // assign to session variable
         console.log(newMathSheet);
         delete req.session.formLoaded;

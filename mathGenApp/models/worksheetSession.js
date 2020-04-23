@@ -13,34 +13,44 @@ let createMathObj = function (options){ // topic , noOfQuestions, maxValue
     }
     return newMathGame; //return new math obj
   }
-  
-  let checkAnswers = function (answers, mathGame, operator) {
-  var operators = { // change operator depending on 'operator' value passed.
+  // answers, mathGame, operator
+  let checkAnswers = function (workSheet, answers) {
+  var operators = { // change operator depending on 'topic' value passed.
     'Addition': function(a, b) { return a + b},
     'Subtraction': function(a, b) { return a - b},
     'Multiplication': function(a, b) { return a * b},
     'Division': function(a, b) { return a / b}
   }
-  var answerObj = {
-    correctAnswerCount: 0,
-    calculatedAnswers: []
+  var worksheetDetails = { // returned Obj
+    name: workSheet.name,
+    topic: workSheet.topic,
+    questions: workSheet.numberList,
+    noOfQuestions: workSheet.numberList.length,
+    userAnswers: [],
+    calculatedAnswers: [],
+    correctAnswerCount: 0
+  }
+ for(let index1 = 0; index1 < worksheetDetails.noOfQuestions;index1++) {
+    worksheetDetails.userAnswers.push({
+      "answer": answers["answer_" + index1]
+    }); 
   }
   console.log(answers); 
-  gameLength = mathGame.numberList.length;
+  gameLength = workSheet.numberList.length;
   console.log(gameLength);
   for (let index = 0; index < gameLength; index++) { // loop
-    const question = mathGame.numberList[index];
-    console.log(JSON.stringify(mathGame.numberList[index]))
+    const question = workSheet.numberList[index];
+    console.log(JSON.stringify(workSheet.numberList[index]))
     var op1 = parseInt(question.randomNumber1, 10);
     var op2 = parseInt(question.randomNumber2, 10);
     var answerToCheck = answers["answer_" + index]; // for loop iterates index for each answer...
-    console.log('answer = ', operators[operator](op1,op2), 'user answer = ', answerToCheck); // Generated result and user answer
-    if (operators[operator](op1,op2) == answerToCheck) { // check if results matches user answer
-      answerObj.correctAnswerCount++; //increment count
+    console.log('answer = ', operators[workSheet.topic](op1,op2), 'user answer = ', answerToCheck); // Generated result and user answer
+    if (operators[workSheet.topic](op1,op2) == answerToCheck) { // check if results matches user answer
+      worksheetDetails.correctAnswerCount++; //increment count
     }
-    answerObj.calculatedAnswers.push({ answer: operators[operator](op1,op2)});
+    worksheetDetails.calculatedAnswers.push({ answer: operators[workSheet.topic](op1,op2)});
   } //loop
-  return answerObj;
+  return worksheetDetails;
   }
 
 module.exports = {

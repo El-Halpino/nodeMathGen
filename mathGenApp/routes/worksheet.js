@@ -5,13 +5,19 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId; 
 var url = "mongodb://localhost:27017/";
 
-const workSheet = require("../models/worksheetSession.js");
+const mathFunction = require("../models/worksheetSession.js");
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
+  console.clear();
   if (req.session.worksheetLoaded == true) {
-
+    var workSheet = req.session.currentWorksheet;
+    var answers = req.query;
+    var worksheetDetails = mathFunction.checkAnswers(workSheet, answers);
+    console.log(JSON.stringify(worksheetDetails));
     delete req.session.worksheetLoaded;
+    delete req.session.currentWorksheet;
+    res.render("result", worksheetDetails);
   }
   else 
   {
@@ -25,10 +31,16 @@ router.get('/worksheet', function(req, res, next) {
       var query = {"_id" : ObjectId(workSheetID._id)};
       dbo.collection("worksheets").find(query).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result);
+        console.log(result[0].name);
         console.log(typeof(result));
         db.close();
-        res.render("worksheet", {results: result});
+        var worksheetObj = {
+          name: result[0].name,
+          topic: result[0].topic,
+          numberList: result[0].numberList
+        }
+        req.session.currentWorksheet = worksheetObj;
+        res.render("worksheet", worksheetObj);
       });
     }); 
   }

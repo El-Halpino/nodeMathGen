@@ -20,7 +20,7 @@
         <tr>
             <th>Answer</th>
         </tr>
-        {{#each answers}}
+        {{#each userAnswers}}
         <tr>
             <td>&nbsp;{{this.answer}}</td>
         </tr>    
@@ -37,7 +37,7 @@
         {{/each}}      
 </table>
 <div style="position: relative"><p style="position: fixed; bottom: 0; width:100%; text-align: left">
-    You got {{answerCount}} correct out of {{gameLength}}
+    You got {{correctAnswerCount}} correct out of {{noOfQuestions}}
     <br>
     <button onclick="loadHome()">Return to Home</button>
 </p></div>
