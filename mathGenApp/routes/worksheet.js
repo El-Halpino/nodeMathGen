@@ -26,14 +26,9 @@ router.get('/worksheet', function(req, res, next) {
       dbo.collection("worksheets").find(query).toArray(function(err, result) {
         if (err) throw err;
         console.log(result);
+        console.log(typeof(result));
         db.close();
-        var worksheetObj = {
-          "_id": result._id,
-          "name": result.name,
-          "topic": result.topic,
-          "numberList": result.numberList
-        }
-        res.render('worksheet', worksheetObj);
+        res.render("worksheet", {results: result});
       });
     }); 
   }

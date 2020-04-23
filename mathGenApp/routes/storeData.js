@@ -8,6 +8,7 @@ var url = "mongodb://localhost:27017/";
 router.get('/storeData', function(req, res, next) {
 
 worksheetObj = req.session.mathGame;
+console.log(worksheetObj);
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
