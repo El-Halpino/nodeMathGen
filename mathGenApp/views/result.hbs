@@ -1,4 +1,5 @@
-<h1>{{title}}</h1>
+<h1>Worksheet Name: {{name}}</h1>
+<h2>{{topic}}</h2>
 <style>
     table {
         float:left;
@@ -36,8 +37,8 @@
         </tr>    
         {{/each}}      
 </table>
-<div style="position: relative"><p style="position: fixed; bottom: 0; width:100%; text-align: left">
-    You got {{correctAnswerCount}} correct out of {{noOfQuestions}}
+<div><p style="position: bottom: 0; width:100%; text-align: left">
+    You got {{correctAnswerCount}} correct, out of {{noOfQuestions}}
     <br>
     <button onclick="loadHome()">Return to Home</button>
 </p></div>

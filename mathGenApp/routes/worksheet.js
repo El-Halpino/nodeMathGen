@@ -6,6 +6,7 @@ var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
 
 const mathFunction = require("../models/worksheetSession.js");
+const mongoFunction = require("../models/mongoSession.js")
 
 /* GET worksheet page. */
 router.get('/worksheet', function(req, res, next) {
@@ -21,36 +22,19 @@ router.get('/worksheet', function(req, res, next) {
   }
   else 
   {
-    console.clear();
     req.session.worksheetLoaded = true;
     var workSheetID = req.query;
     console.log(workSheetID._id);
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("appDB");
-      var query = {"_id" : ObjectId(workSheetID._id)};
-      dbo.collection("worksheets").find(query).toArray(function(err, result) {
-        if (err) throw err;
-        console.log(result[0].name);
-        console.log(typeof(result));
-        db.close();
-        var worksheetObj = {
-          name: result[0].name,
-          topic: result[0].topic,
-          numberList: result[0].numberList
-        }
-        req.session.currentWorksheet = worksheetObj;
-        res.render("worksheet", worksheetObj);
-      });
-    }); 
+    var worksheet = mongoFunction.findWorksheet(workSheetID);
+    console.log(worksheet, "THIS");
+    req.session.currentWorksheet = worksheet;
+    res.render("worksheet", worksheet);
   }
-});   
+});  
 
 module.exports = router;
 
 // ObjectId("5ea09f7562dce42835ba1d3d")
-
-
 /*
 var mathGame = req.session.mathGame;
     var operator = req.session.worksheetOptions['topic'];
@@ -73,3 +57,23 @@ var mathGame = req.session.mathGame;
     req.session.destroy(); // clear session variables
     res.render("result", gameDetails);
 */
+
+/* MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("appDB");
+      var query = {"_id" : ObjectId(workSheetID._id)};
+      dbo.collection("worksheets").find(query).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result[0].name);
+        console.log(typeof(result));
+        db.close();
+        var worksheetObj = {
+          name: result[0].name,
+          topic: result[0].topic,
+          numberList: result[0].numberList
+        }
+
+        req.session.currentWorksheet = worksheetObj;
+        res.render("worksheet", worksheetObj);
+      });
+    }); */
