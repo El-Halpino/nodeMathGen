@@ -3,7 +3,7 @@ var session = require('express-session');
 var router = express.Router();
 
 const mathHelpers = require("../models/worksheetSession.js");
-const mongoHelpers = require("../models/mongoSession.js")
+const mongoHelpers = require("../models/mongoSession.js");
 
 var renderFuncNoWorksheet = (request, response, worksheet) => {
     console.log(worksheet);

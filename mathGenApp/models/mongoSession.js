@@ -1,9 +1,6 @@
-var express = require('express');
-var session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
-
 
 let findWorksheet = function (workSheetID, callback, request, response) {
     MongoClient.connect(url, function (err, db) {
@@ -26,6 +23,35 @@ let findWorksheet = function (workSheetID, callback, request, response) {
     });
 }
 
+let findWorksheetList = function (callback, response) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        dbo.collection("worksheets").find({}).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(JSON.stringify(result));
+            db.close();
+            callback(result, response);
+        })
+    });
+}
+
+let storeWorksheet = function (worksheetObj) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        var myobj = { name: worksheetObj.name, topic: worksheetObj.title, numberList: worksheetObj.numberList };
+        dbo.collection("worksheets").insertOne(myobj, function (err, res) {
+            if (err) throw err;
+            console.log("1 worksheet inserted");
+            db.close();
+            return;
+        });
+    });
+}
+
 module.exports = {
-    findWorksheet: findWorksheet
+    findWorksheet: findWorksheet,
+    findWorksheetList: findWorksheetList,
+    storeWorksheet: storeWorksheet
 };

@@ -1,5 +1,3 @@
-
-
 let createMathObj = function (options) { // topic , name, noOfQuestions, maxValue
   var newMathGame = {
     title: options["topic"],
@@ -55,12 +53,7 @@ let checkAnswers = function (workSheet, answers) {
   return worksheetDetails;
 }
 
-let renderWorksheet = function (response, request) { // topic , name, noOfQuestions, maxValue
-  res.render("worksheet", worksheet);
-}
-
 module.exports = {
   createMathObj: createMathObj,
-  checkAnswers: checkAnswers,
-  renderWorksheet: renderWorksheet
+  checkAnswers: checkAnswers
 };
