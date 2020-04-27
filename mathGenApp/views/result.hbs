@@ -2,46 +2,48 @@
 <h2>{{topic}}</h2>
 <style>
     table {
-        float:left;
+        float: left;
     }
 </style>
- <table>
-        <tr>
-            <th>Operand1</th>
-            <th>Operand2</th>
-        </tr>
-        {{#each questions}}
-        <tr>
-            <td>{{this.randomNumber1}}</td>
-            <td>{{this.randomNumber2}}</td>
-        </tr>    
-        {{/each}}
-</table>
- <table>
-        <tr>
-            <th>Answer</th>
-        </tr>
-        {{#each userAnswers}}
-        <tr>
-            <td>&nbsp;{{this.answer}}</td>
-        </tr>    
-        {{/each}}
+<table>
+    <tr>
+        <th>Operand1</th>
+        <th>Operand2</th>
+    </tr>
+    {{#each questions}}
+    <tr>
+        <td>{{this.randomNumber1}}</td>
+        <td>{{this.randomNumber2}}</td>
+    </tr>
+    {{/each}}
 </table>
 <table>
-        <tr>
-            <th>Result</th>
-        </tr>
-        {{#each calculatedAnswers}}
-        <tr>
-            <td>{{this.answer}}</td>
-        </tr>    
-        {{/each}}      
+    <tr>
+        <th>Answer</th>
+    </tr>
+    {{#each userAnswers}}
+    <tr>
+        <td>&nbsp;{{this.answer}}</td>
+    </tr>
+    {{/each}}
 </table>
-<div><p style="position: bottom: 0; width:100%; text-align: left">
-    You got {{correctAnswerCount}} correct, out of {{noOfQuestions}}
-    <br>
-    <button onclick="loadHome()">Return to Home</button>
-</p></div>
+<table>
+    <tr>
+        <th>Result</th>
+    </tr>
+    {{#each calculatedAnswers}}
+    <tr>
+        <td>{{this.answer}}</td>
+    </tr>
+    {{/each}}
+</table>
+<div>
+    <p style="position: bottom: 0; width:100%; text-align: left">
+        You got {{correctAnswerCount}} correct, out of {{noOfQuestions}}
+        <br>
+        <button onclick="loadHome()">Return to Home</button>
+    </p>
+</div>
 <script>
     function loadHome() {
         location.replace("/home")
