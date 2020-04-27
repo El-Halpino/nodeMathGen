@@ -5,31 +5,29 @@ var router = express.Router();
 const mathHelpers = require("../models/worksheetSession.js");
 const mongoHelpers = require("../models/mongoSession.js")
 
-var renderFuncNoWorksheet = (worksheetObj, request, response) => {
-  return (worksheetObj) => {
-    console.log(worksheetObj);
-    request.session.currentWorksheet = worksheetObj;
-    response.render("worksheet", worksheetObj);
+var renderFuncNoWorksheet = (request, response, worksheet) => {
+    console.log(worksheet);
+    request.session.currentWorksheet = worksheet;
+    response.render("worksheet", worksheet);
   };
-};
 
 /* GET worksheet page. */
-router.get('/worksheet', function (req, res, next) {
+router.get('/worksheet', function (request, response, next) {
   console.clear();
-  if (req.session.worksheetLoaded == true) { // If worksheet has been loaded
-    var workSheet = req.session.currentWorksheet;
-    var answers = req.query;
+  if (request.session.worksheetLoaded == true) { // If worksheet has been loaded
+    var workSheet = request.session.currentWorksheet;
+    var answers = request.query;
     var worksheetDetails = mathHelpers.checkAnswers(workSheet, answers);
     console.log(JSON.stringify(worksheetDetails));
-    delete req.session.worksheetLoaded;
-    delete req.session.currentWorksheet;
-    res.render("result", worksheetDetails);
+    delete request.session.worksheetLoaded;
+    delete request.session.currentWorksheet;
+    response.render("result", worksheetDetails);
   }
   else { // If worksheet hasn't been loaded
-    req.session.worksheetLoaded = true;
-    var workSheetID = req.query;
+    request.session.worksheetLoaded = true;
+    var workSheetID = request.query;
     console.log(workSheetID._id);
-    mongoHelpers.findWorksheet(workSheetID, renderFuncNoWorksheet);
+    mongoHelpers.findWorksheet(workSheetID, renderFuncNoWorksheet, request, response);
   }
 });
 

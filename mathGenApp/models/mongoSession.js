@@ -1,9 +1,11 @@
+var express = require('express');
+var session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
 
 
-let findWorksheet = function (workSheetID, renderFuncNoWorksheet) {
+let findWorksheet = function (workSheetID, callback, request, response) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -19,7 +21,7 @@ let findWorksheet = function (workSheetID, renderFuncNoWorksheet) {
                 numberList: result[0].numberList
             }
             console.log(worksheetObj, "Inside Function"); //object is ok
-            renderFuncNoWorksheet(worksheetObj);
+            callback(request, response, worksheetObj);
         });
     });
 }
