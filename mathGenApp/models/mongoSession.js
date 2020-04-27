@@ -19,7 +19,7 @@ let findWorksheet = function (workSheetID, renderFuncNoWorksheet) {
                 numberList: result[0].numberList
             }
             console.log(worksheetObj, "Inside Function"); //object is ok
-            renderFuncNoWorksheet();
+            renderFuncNoWorksheet(worksheetObj);
         });
     });
 }

@@ -5,9 +5,9 @@ var router = express.Router();
 const mathHelpers = require("../models/worksheetSession.js");
 const mongoHelpers = require("../models/mongoSession.js")
 
-var renderFuncNoWorksheet = (request, response, worksheetObj) => {
+var renderFuncNoWorksheet = (worksheetObj, request, response) => {
   return (worksheetObj) => {
-    console.log(worksheetObj)
+    console.log(worksheetObj);
     request.session.currentWorksheet = worksheetObj;
     response.render("worksheet", worksheetObj);
   };
@@ -29,7 +29,7 @@ router.get('/worksheet', function (req, res, next) {
     req.session.worksheetLoaded = true;
     var workSheetID = req.query;
     console.log(workSheetID._id);
-    mongoHelpers.findWorksheet(workSheetID, renderFuncNoWorksheet());
+    mongoHelpers.findWorksheet(workSheetID, renderFuncNoWorksheet);
   }
 });
 
