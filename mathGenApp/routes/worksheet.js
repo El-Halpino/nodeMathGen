@@ -23,7 +23,7 @@ router.get('/worksheet', function (request, response, next) {
     delete request.session.currentWorksheet;
     response.render("result", worksheetDetails);
   }
-  else { // If worksheet hasn't been loaded
+  else { // If worksheet hasn't been loaded 
     request.session.worksheetLoaded = true;
     var workSheetID = request.query;
     console.log(workSheetID._id);
