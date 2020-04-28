@@ -9,6 +9,8 @@ var db = monk('localhost:27017/nodeTest1');
 var logger = require('morgan');
 
 //routes
+var signupRouter = require('./routes/signup');
+var loginRouter = require('./routes/login');
 var reDRouter = require('./routes/redirect');
 var homeRouter = require('./routes/home');
 var configWorksheetRouter = require('./routes/configWorksheet');
@@ -35,6 +37,8 @@ app.use(function(req,res,next){
   next();
 });
 
+app.use('/', signupRouter);
+app.use('/', loginRouter);
 app.use('/', reDRouter);
 app.use('/', homeRouter);
 app.use('/', configWorksheetRouter);

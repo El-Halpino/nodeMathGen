@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* Redirect to Home */
+/* Redirect to Login Or Signup */
 router.get('/', function(req, res, next) {
-  res.redirect('/home');
+
+  res.render("redirect");
 });
 
 module.exports = router;
