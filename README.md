@@ -1,4 +1,4 @@
-# Read Me
+# How to run the Math Worksheet Generator (MWG)
 
 1. How to run App locally - <br>
     1. Navigate to working directory ../nodeMathGen/mathGenApp <br>
