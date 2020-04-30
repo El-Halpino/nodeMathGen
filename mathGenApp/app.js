@@ -4,8 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/nodeTest1');
 var logger = require('morgan');
 
 //routes
@@ -30,12 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({secret: "dont_reveal"}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Make db accessible to router
-app.use(function(req,res,next){
-  req.db = db;
-  next();
-});
 
 app.use('/', signupRouter);
 app.use('/', loginRouter);

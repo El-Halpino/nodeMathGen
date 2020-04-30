@@ -2,7 +2,6 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
 }
@@ -10,26 +9,39 @@ table {
   width: 25%;
   table-layout: fixed;
 }
-
 table,
     th,
     td {
         border: 1px solid black;
         text-align: center;
-    }
-
+}
 th {
     height: 50;
     background-color: #4CAF50;
     color: white;
-  }
-
+}
 input[type=number] {
    width: 80px;
 }
-
 .align-left {
   margin-left:5em;
 }
+
+.signup_container {
+  background-color: rgba(211, 211, 211, 0.37);
+  width: 300px;
+  border: 10px solid #ff9a02e8;
+  padding: 30px;
+  margin: 20px;
+}
+
+.login_container {
+    background-color: rgba(211, 211, 211, 0.37);
+    width: 300px;
+    border: 10px solid #47fa00e8;
+    padding: 30px;
+    margin: 20px;
+}
+
 
   

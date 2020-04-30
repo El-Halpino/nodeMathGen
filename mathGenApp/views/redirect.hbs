@@ -1,13 +1,38 @@
-<h1></h1>
-<p name="redirect">
-If you already have an account<button onclick="loadLogin()">Login</button><br>
-If you're new<button onclick="loadSignup()">Sign up</button>
-</p>
-<script>
-    function loadLogin() {
-        location.replace("/login")
-    }
-    function loadSignup() {
-        location.replace("/signup")
-    }
-</script>
+<h1>Welcome to the Math Worksheet Generator Web App</h1>
+<div class="signup_container">
+    <h2 align="center">Signup Form</h2>
+    <form action="/signup">
+        <label for="userName">Username:</label>
+        <input type="text" name="user" id="user" required>
+        <br>
+        <label for="pwd">Password:</label>
+        <input type="password" name="pwd" id="pwd" required>
+        <br>
+        <label for="usertype">User Type:</label>
+        <select id="usertype" name="usertype" required>
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+        </select>
+        <br>
+        <input align="center" type="submit" value="Submit">
+    </form>
+</div>
+{{message}}
+<div class="login_container">
+    <h2 align="center">Login Form</h2>
+    <form action="/login">
+        <label for="userName">Username:</label>
+        <input type="text" name="username" id="username" required>
+        <br>
+        <label for="pwd">Password:</label>
+        <input type="password" name="pwd" id="pwd" required>
+        <br>
+        <label for="usertype">User Type:</label>
+        <select id="usertype" name="usertype" required>
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+        </select>
+        <br>
+        <input align="center" type="submit" value="Submit">
+    </form>
+</div>
