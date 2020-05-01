@@ -17,8 +17,9 @@ router.get('/worksheet', function (request, response, next) {
   if (request.session.worksheetLoaded == true) { // If worksheet has been loaded
     var workSheet = request.session.currentWorksheet;
     var answers = request.query;
+    console.log("ANSWERS", answers);
     var worksheetDetails = mathHelpers.checkAnswers(workSheet, answers);
-    console.log(JSON.stringify(worksheetDetails));
+    console.log("Worksheet Details" ,worksheetDetails);
     delete request.session.worksheetLoaded;
     delete request.session.currentWorksheet;
     response.render("result", worksheetDetails);
