@@ -13,7 +13,6 @@
     2. FROM node:9-slim <br>
     WORKDIR /mathGenApp <br>
     COPY package.json /mathGenApp <br>
-    RUN npm install <br>
     COPY . /mathGenApp <br>
     CMD ["npm", "start"] <br>
 

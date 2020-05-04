@@ -1,13 +1,23 @@
 <h1>Welcome to the login page</h1>
 <div class="login_container">
     <h2 align="center">Login Form</h2>
-    <form action="">
-        <label for="userName">Username:</label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <label for="pwd">Password:</label>
-        <input type="password" name="pwd" id="pwd" required>
-        <br>
-        <input align="center" type="submit" value="Submit">
+    <form action="/login" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <br>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <br>
+        </div>
+        <div>
+            <label for="pwd">Password:</label>
+            <input type="password" name="pwd" id="pwd" required>
+            <br>
+        </div>
+        <input align="center" type="submit" value="Login">
     </form>
 </div>
+<a href="/Signup">Signup</a>
