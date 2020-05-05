@@ -11,7 +11,7 @@ var renderFuncNoWorksheet = (result, response) => {
 
 /* GET viewWorksheets page. */
 router.get('/viewWorksheets', function (request, response, next) {
-    request.session.destroy();
+    delete request.session.worksheetLoaded;
     mongoHelpers.findWorksheetList(renderFuncNoWorksheet, response);
 });
 

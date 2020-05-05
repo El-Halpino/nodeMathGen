@@ -2,6 +2,7 @@ let createMathObj = function (options) { // topic , name, noOfQuestions, maxValu
   var newMathGame = {
     title: options["topic"],
     name: options["name"],
+    author: options["author"],
     numberList: [] //initialise list
   };
   for (var i = 0; i < options["noOfQuestions"]; i++) {

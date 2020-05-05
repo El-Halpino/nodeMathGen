@@ -8,12 +8,15 @@ const mathHelpers = require("../models/worksheetSession.js");
 router.get('/configWorksheet', function (req, res, next) {
   if (req.session.formLoaded == true) //If Page has been loaded...
   {
+    user = req.session.currentUser;
+    console.log("name: ", user.userName);
     console.log(req.query);
     var configOptions = {
       topic: req.query['topics'],
       name: req.query['name'],
       noOfQuestions: req.query['questions'],
-      maxValue: req.query['max']
+      maxValue: req.query['max'],
+      author: user.userName
     }
     console.log(JSON.stringify(configOptions));
     req.session.worksheetOptions = configOptions;

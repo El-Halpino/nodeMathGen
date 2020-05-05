@@ -13,7 +13,7 @@ var userIsValid = (request, response, user, validStatus) => {
     }
     else { //User already exists, send to Signup page
         console.log("User Already Exists");
-        response.render("signup", {message: "User Already Exists"});
+        response.render("signup", { message: "User Already Exists" });
     }
 };
 
@@ -30,6 +30,7 @@ router.post('/signup', async (request, response) => {
         newUser = {
             userName: request.body.username,
             email: request.body.email,
+            type: request.body.type,
             hashedPassword: hashedPass
         }
         userHelpers.checkUser(request, response, newUser, userIsValid);

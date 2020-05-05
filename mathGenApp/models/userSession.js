@@ -4,11 +4,11 @@ var url = "mongodb://localhost:27017/";
 var bcrypt = require('bcryptjs');
 //Collection Users
 
-let signup = function (newUser) {
+let signup = function (newUser) { // Create New User
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
-        var userObj = { userName: newUser.userName, email: newUser.email, pwd: newUser.hashedPassword };
+        var userObj = { userName: newUser.userName, email: newUser.email, type: newUser.type, pwd: newUser.hashedPassword };
         dbo.collection("users").insertOne(userObj, function (err, res) {
             if (err) throw err;
             console.log("1 user inserted");
@@ -18,8 +18,9 @@ let signup = function (newUser) {
     });
 }
 
-let checkUser = function (request, response, user, userIsValid) {
-    MongoClient.connect(url, function (err, db) {
+// Signup Validation
+let checkUser = function (request, response, user, userIsValid) { // validStatus is sent to userIsValid Function. 
+    MongoClient.connect(url, function (err, db) { // False if user is found, True if user does not exist.
         if (err) throw err;
         var dbo = db.db("appDB");
         dbo.collection("users").findOne({ userName: user.userName }, function (err, userFound) {
@@ -31,7 +32,7 @@ let checkUser = function (request, response, user, userIsValid) {
             } else {
                 console.log("user does not exist");
                 validStatus = true;
-                userIsValid(request, response, userFound, validStatus);
+                userIsValid(request, response, false, validStatus);
             }
             db.close();
             return;
@@ -39,7 +40,7 @@ let checkUser = function (request, response, user, userIsValid) {
     });
 }
 
-let findUser = function (request, response, user, checkIfValid) {
+let findUser = function (request, response, user, checkIfValid) { // For login
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -61,7 +62,7 @@ let findUser = function (request, response, user, checkIfValid) {
 }
 
 let checkPassword = async function (request, response, user, password, callback) {
-    const match = await bcrypt.compare(password, user.pwd);
+    const match = await bcrypt.compare(password, user.pwd); // Compare password entered with the stored hashed password - returns true if passwords match
     console.log("MATCH Result: ", match);
     callback(request, response, user, match);
 }
