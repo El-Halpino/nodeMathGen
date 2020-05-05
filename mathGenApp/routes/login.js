@@ -3,23 +3,31 @@ var session = require('express-session');
 var router = express.Router();
 
 
-const userHelpers = require("../models/userSession.js"); 
+const userHelpers = require("../models/userSession.js");
 
-var checkIfValid = (request, response, user, validStatus) => {
+var redirectUser = (request, response, user, match) => {
+    console.log("here", user, match);
+    if (match == true) { // Passwords Match, send user to /home
+        request.session.currentUser = user;
+        response.redirect("/home");
+    } else {
+        console.log("Passwords Do Not Match"); // Passwords do not Match, send user to /login
+        response.redirect("/login");
+    }
+};
+
+var checkIfValid = async (request, response, user, validStatus) => {
     console.log(validStatus);
-    if (validStatus == true) { // User does not exist
+    if (validStatus == true) { // User does not exist 
         console.log("User Does Not Exist");
         response.redirect("/signup");
     }
     else { //Username exists /
+        givenPass = request.body.pwd;
+        userHelpers.checkPassword(request, response, user, givenPass, redirectUser)
         console.log(user)
-        passwordCheck = userHelpers.checkPassword(user);
-        console.log(passwordCheck);
-        response.redirect("/home");
     }
 };
-
-
 
 /* GET login page. */
 router.get('/login', function (request, response, next) {
@@ -31,7 +39,7 @@ router.post('/login', function (request, response, next) {
     userToCheck = request.body;
     try {
         userHelpers.findUser(request, response, userToCheck, checkIfValid);
-    } 
+    }
     catch (err) {
         console.log("Error In Login");
         response.redirect("/login");
