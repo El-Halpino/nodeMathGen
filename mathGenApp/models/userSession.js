@@ -22,7 +22,7 @@ let checkUser = function (request, response, user, userIsValid) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
-        dbo.collection("users").findOne({ username: user.userName }, function (err, userFound) {
+        dbo.collection("users").findOne({ userName: user.userName }, function (err, userFound) {
             if (err) throw err;
             if (userFound) {
                 console.log("1 user found");

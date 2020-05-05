@@ -7,13 +7,13 @@ const userHelpers = require("../models/userSession.js");
 
 var userIsValid = (request, response, user, validStatus) => {
     console.log(validStatus);
-    if (validStatus == true) { // User is unique, add to DB
+    if (validStatus == true) { // User is unique, add to DB (Create User)
         userHelpers.signup(newUser);
         response.redirect("/login");
     }
     else { //User already exists, send to Signup page
         console.log("User Already Exists");
-        response.redirect("/signup");
+        response.render("signup", {message: "User Already Exists"});
     }
 };
 
