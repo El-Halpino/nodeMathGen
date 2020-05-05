@@ -21,16 +21,16 @@ let checkUser = function (request, response, user, userIsValid) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
-        dbo.collection("users").findOne({ username: user.userName }, function (err, user) {
+        dbo.collection("users").findOne({ username: user.userName }, function (err, userFound) {
             if (err) throw err;
-            if (user) {
+            if (userFound) {
                 console.log("1 user found");
                 validStatus = false;
-                userIsValid(request, response, validStatus)
+                userIsValid(request, response, userFound, validStatus)
             } else {
                 console.log("user does not exist");
                 validStatus = true;
-                userIsValid(request, response, validStatus);
+                userIsValid(request, response, userFound, validStatus);
             }
             db.close();
             return;
@@ -38,12 +38,34 @@ let checkUser = function (request, response, user, userIsValid) {
     });
 }
 
-let login = function () {
+let findUser = function (request, response, user, checkIfValid) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        dbo.collection("users").findOne({ username: user.userName }, function (err, user) {
+            if (err) throw err;
+            if (user) {
+                console.log("1 user found");
+                validStatus = false;
+                checkIfValid(request, response, validStatus)
+            } else {
+                console.log("user does not exist");
+                validStatus = true;
+                checkIfValid(request, response, validStatus);
+            }
+            db.close();
+            return;
+        });
+    });
+}
+
+let checkPassword = function () {
 
 }
 
 module.exports = {
-    login: login,
+    checkPassword: checkPassword,
     checkUser: checkUser,
-    signup: signup
+    signup: signup,
+    findUser: findUser
 };

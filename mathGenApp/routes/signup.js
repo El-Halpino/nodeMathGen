@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 
 const userHelpers = require("../models/userSession.js");
 
-var userIsValid = (request, response, validStatus) => {
+var userIsValid = (request, response, user, validStatus) => {
     console.log(validStatus);
     if (validStatus == true) { // User is unique, add to DB
         userHelpers.signup(newUser);
@@ -19,8 +19,6 @@ var userIsValid = (request, response, validStatus) => {
 
 /* GET signup page. */
 router.get('/signup', (request, response, next) => {
-
-
     response.render('signup.hbs');
 });
 
@@ -36,6 +34,7 @@ router.post('/signup', async (request, response) => {
         }
         userHelpers.checkUser(request, response, newUser, userIsValid);
     } catch (err) {
+        console.log("Error In Signup");
         response.redirect("/signup");
     }
 })
