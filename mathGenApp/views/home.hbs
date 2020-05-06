@@ -1,7 +1,8 @@
 <h1>{{title}}</h1>
 <h2>Weclome {{name}} to the Math Worksheet Generator</h2>
 <p><button onclick="loadConfigWorksheet()">Configure Worksheet</button>
-    <button onclick="loadWorksheetList()">View Worksheets</button></p>
+    <button onclick="loadWorksheetList()">View Worksheets</button>
+    <button onclick="loadScores()">View Scores</button></p>
 <p>
 </p>
 <script>
@@ -10,5 +11,8 @@
     }
     function loadConfigWorksheet() {
         location.replace("/configWorksheet")
+    }
+    function loadScores() {
+        location.replace("/scores")
     }
 </script>

@@ -15,6 +15,7 @@ let findWorksheet = function (workSheetID, callback, request, response) {
             db.close();
             var worksheetObj = {
                 name: result[0].name,
+                author: result[0].author,
                 topic: result[0].topic,
                 numberList: result[0].numberList
             }

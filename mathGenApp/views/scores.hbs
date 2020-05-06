@@ -1,0 +1,31 @@
+<h1>Score Page</h1>
+<p>
+    <form action="/scores" method="POST">
+        <label for="teacher">Enter Teacher Name: </label>
+        <input type="text" name="teacher" required>
+        <br>
+        <label for="worksheetName">Enter Worksheet Name: </label>
+        <input type="text" name="worksheetName" required>
+        <br>
+        <input type="submit" value="Find Scores">
+    </form>
+    <br>
+    <button onclick="loadHome()">Home</button>
+</p>
+<h2>Scores</h2>
+<h3>Search Results</h3>
+<p>
+    <ol>
+        {{#each worksheets}}
+        <li>Worksheet Name: {{this.worksheetName}}<br>
+            Worksheet Author: {{this.teacher}}<br>
+            Student Name: {{this.userName}}<br>
+            Score: {{this.score}}</li><br>
+        {{/each}}
+    </ol>
+</p>
+<script>
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

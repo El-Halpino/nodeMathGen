@@ -1,0 +1,21 @@
+<h1>Score Page</h1>
+<h2>Welcome {{name}}</h2>
+<p>
+    <br>
+    <form action="/scores" method="POST">
+        <label for="teacher">Enter Teacher Name: </label>
+        <input type="text" name="teacher" required>
+        <br>
+        <label for="worksheetName">Enter Worksheet Name: </label>
+        <input type="text" name="worksheetName" required>
+        <br>
+        <input type="submit" value="Find Scores">
+    </form>
+    <br>
+    <button onclick="loadHome()">Home</button>
+</p>
+<script>
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

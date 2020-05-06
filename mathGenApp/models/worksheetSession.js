@@ -16,7 +16,7 @@ let createMathObj = function (options) { // topic , name, noOfQuestions, maxValu
 }
 // answers, mathGame, operator
 let checkAnswers = function (workSheet, answers) {
-  var operators = { // change operator depending on 'topic' value passed.
+  var operators = { // change operation depending on 'topic' value passed.
     'Addition': function (a, b) { return a + b },
     'Subtraction': function (a, b) { return a - b },
     'Multiplication': function (a, b) { return a * b },
