@@ -5,10 +5,10 @@ var url = "mongodb://localhost:27017/";
 let updateScore = function (request, response, teacher, score, worksheetName, userName, renderResultsFunc) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        console.log(teacher, score, worksheetName, userName )
+        console.log(teacher, score, worksheetName, userName)
         var dbo = db.db("appDB");
         var myquery = { teacher: teacher, worksheetName: worksheetName, userName: userName };
-        var newScore = {$set:  {"score": score}};
+        var newScore = { $set: { "score": score } };
         dbo.collection("scores").updateOne(myquery, newScore, function (err, res) {
             if (err) throw err;
             console.log("1 score updated");
@@ -63,8 +63,18 @@ let saveScore = function (teacher, score, worksheetName, userName) {
     });
 }
 
-let findScores = function (worksheetName, teacher) {
-
+let findScores = function (response, teacher, worksheetName, callback) { // list of scores filtered for specified teacher and worksheetName
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        dbo.collection("scores").find({worksheetName: worksheetName, teacher: teacher}).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(JSON.stringify(result));
+            console.log("SCORES FOUND");
+            db.close();
+            callback(result, response);
+        })
+    });
 }
 
 module.exports = {

@@ -4,6 +4,11 @@ var router = express.Router();
 
 const scoreHelpers = require("../models/scoresSession.js");
 
+var renderScores = (scoreList, response) => {
+    console.log(scoreList);
+    response.render("scores", { scores: scoreList });
+};
+
 /* GET scores page. */
 router.get('/scores', function (request, res, next) {
     user = request.session.currentUser;
@@ -12,11 +17,10 @@ router.get('/scores', function (request, res, next) {
 });
 
 /* POST scores page. */
-router.post('/scores', function (request, res, next) {
+router.post('/scores', function (request, response, next) {
     user = request.session.currentUser;
-    console.log("Weclome ", user.userName);
-
-    res.render("scores", { });
+    console.log(user.userName);
+    scoreHelpers.findScores( response, request.body.teacher, request.body.worksheetName, renderScores);
 });
 
 module.exports = router;
