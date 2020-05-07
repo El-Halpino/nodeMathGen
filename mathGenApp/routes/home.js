@@ -6,7 +6,7 @@ var router = express.Router();
 router.get('/home', function (request, res, next) {
   user = request.session.currentUser;
   console.log("Weclome ", user.userName);
-  res.render("home", { title: "Home" , name: user.userName});
+  res.render("home", { title: "Home" , name: user.userName, type: user.type});
 });
 
 module.exports = router;

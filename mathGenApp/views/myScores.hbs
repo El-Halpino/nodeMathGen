@@ -1,0 +1,18 @@
+<h2>Scores</h2>
+<h3>Score Results for {{username}}</h3>
+<p>
+    <ol>
+        {{#each scores}}
+        <li>Worksheet Name: {{this.worksheetName}}<br>
+            Worksheet Author: {{this.teacher}}<br>
+            Student Name: {{this.userName}}<br>
+            Score: {{this.score}}</li><br>
+        {{/each}}
+    </ol>
+</p>
+<button onclick="loadHome()">Home</button>
+<script>
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

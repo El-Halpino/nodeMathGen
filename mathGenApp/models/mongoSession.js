@@ -1,6 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
+const mongodb = require('mongodb');
 var url = "mongodb://localhost:27017/";
+
 // Collection Worksheets
 
 let findWorksheet = function (workSheetID, callback, request, response) {
@@ -52,8 +54,25 @@ let storeWorksheet = function (worksheetObj) {
     });
 }
 
+let deleteWorksheet = function (renderFuncNoWorksheet, response, worksheetID) { // NOT WORKING, wont delete
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        console.log(worksheetID)
+        var objToDelete = { "_id": ObjectId(worksheetID) };
+        dbo.collection("worksheets").deleteOne({"_id": ObjectId(worksheetID)}, function (err, obj) {
+            if (err) throw err;
+            console.log("1 worksheet deleted");
+            db.close();
+            findWorksheetList(renderFuncNoWorksheet, response);
+            return;
+        });
+    });
+}
+
 module.exports = {
     findWorksheet: findWorksheet,
     findWorksheetList: findWorksheetList,
-    storeWorksheet: storeWorksheet
+    storeWorksheet: storeWorksheet,
+    deleteWorksheet: deleteWorksheet
 };

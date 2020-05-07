@@ -16,6 +16,7 @@ var worksheetRouter = require('./routes/worksheet');
 var storeDatatRouter = require('./routes/storeData');
 var viewWorksheetsRouter = require('./routes/viewWorksheets');
 var scoresRouter = require('./routes/scores');
+var myScoresRouter = require('./routes/myScores');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/', worksheetRouter);
 app.use('/', storeDatatRouter);
 app.use('/', viewWorksheetsRouter); 
 app.use('/', scoresRouter);
+app.use('/', myScoresRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

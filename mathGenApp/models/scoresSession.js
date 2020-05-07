@@ -1,15 +1,15 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
-// collection scores
+// collection - scores
 
-let updateScore = function (request, response, teacher, score, worksheetName, userName, renderResultsFunc) {
-    MongoClient.connect(url, function (err, db) {
+let updateScore = async function (request, response, teacher, score, worksheetName, userName, renderResultsFunc) {
+    MongoClient.connect(url, async function (err, db) {
         if (err) throw err;
         console.log(teacher, score, worksheetName, userName)
         var dbo = db.db("appDB");
-        var myquery = { teacher: teacher, worksheetName: worksheetName, userName: userName };
-        var newScore = { $set: { "score": score } };
-        dbo.collection("scores").updateOne(myquery, newScore, function (err, res) {
+        var myquery = { "teacher": teacher, "worksheetName": worksheetName, "userName": userName };
+        var newScore = { "score": score };
+        dbo.collection("scores").updateOne(myquery, { $set: newScore }, function (err, res) {
             if (err) throw err;
             console.log("1 score updated");
             db.close();
@@ -67,7 +67,7 @@ let findScores = function (response, teacher, worksheetName, callback) { // list
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
-        dbo.collection("scores").find({worksheetName: worksheetName, teacher: teacher}).toArray(function (err, result) {
+        dbo.collection("scores").find({ worksheetName: worksheetName, teacher: teacher }).toArray(function (err, result) {
             if (err) throw err;
             console.log(JSON.stringify(result));
             console.log("SCORES FOUND");
@@ -77,8 +77,23 @@ let findScores = function (response, teacher, worksheetName, callback) { // list
     });
 }
 
+let findMyScore = function(response, studentName, callback) { //finjd current users scores
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        dbo.collection("scores").find({ userName: studentName.userName }).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(JSON.stringify(result));
+            console.log("SCORES FOUND");
+            db.close();
+            callback(response, result, studentName);
+        })
+    });
+}
+
 module.exports = {
     saveScore: saveScore,
     checkScore: checkScore,
-    findScores: findScores
+    findScores: findScores,
+    findMyScore: findMyScore
 };

@@ -19,9 +19,11 @@ var userIsValid = (request, response, user, validStatus) => {
 
 /* GET signup page. */
 router.get('/signup', (request, response, next) => {
+    request.session.destroy();
     response.render('signup.hbs');
 });
 
+/* POST signup page. */
 router.post('/signup', async (request, response) => {
     try {
         console.log(request.body.email);

@@ -32,13 +32,13 @@ var checkIfValid = async (request, response, user, validStatus) => {
     }
     else { //Username exists /
         givenPass = request.body.pwd;
-        userHelpers.checkPassword(request, response, user, givenPass, redirectUser)
-        console.log(user)
+        userHelpers.checkPassword(request, response, user, givenPass, redirectUser);
     }
 };
 
 /* GET login page. */
 router.get('/login', function (request, response, next) {
+    request.session.destroy();
     response.render("login"); //Submit posts /login
 });
 
