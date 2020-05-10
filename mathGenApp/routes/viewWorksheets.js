@@ -4,7 +4,7 @@ var router = express.Router();
 
 const mongoHelpers = require("../models/mongoSession.js")
 
-var renderFuncNoWorksheet = (result, response) => {
+var renderFuncNoWorksheet = (result, request, response) => {
   console.log(result);
   response.render("viewWorksheets", { worksheets: result });
 };
@@ -12,7 +12,7 @@ var renderFuncNoWorksheet = (result, response) => {
 /* GET viewWorksheets page. */
 router.get('/viewWorksheets', function (request, response, next) {
   delete request.session.worksheetLoaded;
-  mongoHelpers.findWorksheetList(renderFuncNoWorksheet, response);
+  mongoHelpers.findWorksheetList(renderFuncNoWorksheet, request, response);
 });
 
 /* POST viewWorksheets page. */

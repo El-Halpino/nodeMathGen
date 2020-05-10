@@ -63,7 +63,7 @@ let saveScore = function (teacher, score, worksheetName, userName) {
     });
 }
 
-let findScores = function (response, teacher, worksheetName, callback) { // list of scores filtered for specified teacher and worksheetName
+let findScores = function (request, response, teacher, worksheetName, callback) { // list of scores filtered for specified teacher and worksheetName
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -72,12 +72,12 @@ let findScores = function (response, teacher, worksheetName, callback) { // list
             console.log(JSON.stringify(result));
             console.log("SCORES FOUND");
             db.close();
-            callback(result, response);
+            callback(result, request,  response);
         })
     });
 }
 
-let findMyScore = function(response, studentName, callback) { //finjd current users scores
+let findMyScore = function(response, studentName, callback) { //find current users scores
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");

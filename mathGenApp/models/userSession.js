@@ -61,6 +61,20 @@ let findUser = function (request, response, user, checkIfValid) { // For login
     });
 }
 
+let findUsers = function (request, response, type, callback) { // list of users
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        dbo.collection("users").find({ type: type }).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(JSON.stringify(result));
+            console.log("Users FOUND, User Type: ", type);
+            db.close();
+            callback(result, request, response);
+        })
+    });
+}
+
 let checkPassword = async function (request, response, user, password, callback) {
     const match = await bcrypt.compare(password, user.pwd); // Compare password entered with the stored hashed password - returns true if passwords match
     console.log("MATCH Result: ", match);
@@ -71,5 +85,6 @@ module.exports = {
     checkPassword: checkPassword,
     checkUser: checkUser,
     signup: signup,
-    findUser: findUser
+    findUser: findUser,
+    findUsers: findUsers
 };

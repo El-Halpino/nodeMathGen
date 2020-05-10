@@ -1,6 +1,20 @@
 <h1>Score Page</h1>
 <h2>Welcome {{name}}</h2>
 <p>
+    Teacher Names;
+    <ol>
+        {{#each teachers}}
+        <li>{{this.userName}}</li>
+        {{/each}}
+    </ol>
+    Worksheet Names; 
+    <ol>
+        {{#each worksheets}}
+        <li>{{this.name}} <br> by {{this.author}}</li>
+        {{/each}}
+    </ol>
+</p>
+<p>
     <br>
     <form action="/scores" method="POST">
         <label for="teacher">Enter Teacher Name: </label>

@@ -3,25 +3,42 @@ var session = require('express-session');
 var router = express.Router();
 
 const scoreHelpers = require("../models/scoresSession.js");
+const userHelpers = require("../models/userSession.js");
+const mongoHelpers = require("../models/mongoSession.js");
 
-var renderScores = (scoreList, response) => {
-    console.log(scoreList);
-    response.render("scores", { scores: scoreList });
+var renderScoreSearch = (worksheetList, request, response) => {
+    request.session.worksheetList = worksheetList;
+    user = request.session.currentUser;
+    teacherList = request.session.teacherList;
+    console.log("Weclome ", user.userName);
+    response.render("scoreSearch", { name: user.userName, teachers: teacherList, worksheets: worksheetList });
+};
+
+var findWorksheets = (teacherList, request, response) => {
+    console.log(teacherList);
+    request.session.teacherList = teacherList;
+    mongoHelpers.findWorksheetList(renderScoreSearch, request, response);
+};
+
+var renderScores = (scoreList, request, response) => {
+    worksheetList = request.session.worksheetList;
+    teacherList = request.session.teacherList;
+    console.log(scoreList, teacherList, worksheetList);
+    response.render("scores", { scores: scoreList , teachers: teacherList, worksheets: worksheetList});
 };
 
 /* GET scores page. */
-router.get('/scores', function (request, res, next) {
-    user = request.session.currentUser;
-    console.log("Weclome ", user.userName);
+router.get('/scores', function (request, response, next) {
     // Send list of worksheets and teachers
-    res.render("scoreSearch", { name: user.userName });
+    var type = "Teacher";
+    userHelpers.findUsers(request, response, type, findWorksheets)
 }); 
 
 /* POST scores page. */
 router.post('/scores', function (request, response, next) {
     user = request.session.currentUser;
     console.log(user.userName);
-    scoreHelpers.findScores(response, request.body.teacher, request.body.worksheetName, renderScores);
+    scoreHelpers.findScores(request, response, request.body.teacher, request.body.worksheetName, renderScores);// find score
 });
 
 module.exports = router;

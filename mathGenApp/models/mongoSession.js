@@ -27,7 +27,7 @@ let findWorksheet = function (workSheetID, callback, request, response) {
     });
 }
 
-let findWorksheetList = function (callback, response) {
+let findWorksheetList = function (callback, request, response) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -35,7 +35,7 @@ let findWorksheetList = function (callback, response) {
             if (err) throw err;
             console.log(JSON.stringify(result));
             db.close();
-            callback(result, response);
+            callback(result, request, response);
         })
     });
 }

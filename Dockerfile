@@ -1,5 +1,5 @@
 FROM node:9-slim
-WORKDIR /nodeMathGen
-COPY package.json /nodeMathGen/mathGenApp
+WORKDIR /mathGenApp
+COPY package.json /mathGenApp
 COPY . /nodeMathGen
 CMD ["npm", "start"]

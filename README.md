@@ -8,13 +8,6 @@
     1. [Install Docker Here](https://docs.docker.com/get-docker/) <br>
     2. docker run hello-world (use in terminal)
 
-3. Create a file named "Dockerfile" in the same directory as app.js (mathGenApp) -
-    1. Insert the following into Dockerfile;
-    2. FROM node:9-slim <br>
-    WORKDIR /mathGenApp <br>
-    COPY package.json /mathGenApp <br>
-    COPY . /mathGenApp <br>
-    CMD ["npm", "start"] <br>
 
 4. How to run App in docker - <br>
     1. docker build -t math-app . (use in terminal) <br>
