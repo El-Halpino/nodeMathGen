@@ -1,27 +1,11 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/configWorksheet">configWorksheet</a> </li>
+    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
 <h1>{{title}}</h1>
 <h2>Weclome {{name}} to the Math Worksheet Generator</h2>
-<h3>Type: {{type}}</h3>
-<p><button onclick="loadConfigWorksheet()">Configure Worksheet</button>
-    <button onclick="loadWorksheetList()">View Worksheets</button>
-    <button onclick="loadScores()">View Scores</button>
-    <button onclick="loadMyScores()">View My Scores</button>
-    <button onclick="loadProfile()">My profile</button></p>
-<p>
-</p>
-<script>
-    function loadWorksheetList() {
-        location.replace("/viewWorksheets")
-    }
-    function loadConfigWorksheet() {
-        location.replace("/configWorksheet")
-    }
-    function loadScores() {
-        location.replace("/scores")
-    }
-    function loadMyScores() {
-        location.replace("/myScores")
-    }
-    function loadProfile() {
-        location.replace("/profile")
-    }
-</script>
+<h3>User Type: {{type}}</h3>

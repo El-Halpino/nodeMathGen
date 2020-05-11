@@ -16,12 +16,10 @@ router.get('/profile', function (request, res, next) {
 });
 
 /* POST Profile page. */
-router.post('/profile', function (request, res, next) {
+router.post('/profile', function (request, res, next) { // create a class
     try {
       user = request.session.currentUser;
-      console.log("Goodbye ", user.userName);
-      userHelpers.deleteUser(user);
-      res.render("signup", {message: "Account Deleted"})
+
         
     } catch (err) {
       res.render("error", {message: "Error", error: err});

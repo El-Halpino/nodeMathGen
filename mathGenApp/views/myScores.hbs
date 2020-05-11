@@ -1,3 +1,11 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/configWorksheet">configWorksheet</a> </li>
+    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
 <h2>Scores</h2>
 <h3>Score Results for {{username}}</h3>
 <p>
@@ -10,9 +18,3 @@
         {{/each}}
     </ol>
 </p>
-<button onclick="loadHome()">Home</button>
-<script>
-    function loadHome() {
-        location.replace("/home")
-    }
-</script>

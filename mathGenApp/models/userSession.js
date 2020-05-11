@@ -81,25 +81,10 @@ let checkPassword = async function (request, response, user, password, callback)
     callback(request, response, user, match);
 }
 
-let deleteUser = function (user) {
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db("appDB");
-        console.log(user);
-        dbo.collection("users").deleteOne({userName: user.userName}, function (err, obj) {
-            if (err) throw err;
-            console.log(user.userName," deleted successfully");
-            db.close();
-            return;
-        });
-    });
-}
-
 module.exports = {
     checkPassword: checkPassword,
     checkUser: checkUser,
     signup: signup,
     findUser: findUser,
-    findUsers: findUsers,
-    deleteUser: deleteUser
+    findUsers: findUsers
 };

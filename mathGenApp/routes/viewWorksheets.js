@@ -15,7 +15,7 @@ router.get('/viewWorksheets', function (request, response, next) {
     delete request.session.worksheetLoaded;
     mongoHelpers.findWorksheetList(renderFuncNoWorksheet, request, response);
   } catch (err) {
-    res.render("error", { message: "Error", error: err });
+    response.render("error", { message: "Error", error: err });
   }
 });
 
@@ -24,9 +24,9 @@ router.post('/viewWorksheets', async function (request, response, next) { // Pos
   try {
     worksheetID = request.body._id;
     console.log("HERE", worksheetID);
-    mongoHelpers.deleteWorksheet(renderFuncNoWorksheet, response, worksheetID); // Delete Function
+    mongoHelpers.deleteWorksheet(renderFuncNoWorksheet, request, response, worksheetID); // Delete Function
   } catch (err) {
-    res.render("error", { message: "Error", error: err });
+    response.render("error", { message: "Error", error: err });
   }
 });
 

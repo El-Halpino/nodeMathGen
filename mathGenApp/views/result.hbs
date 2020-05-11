@@ -1,3 +1,11 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/configWorksheet">configWorksheet</a> </li>
+    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
 <h1>Worksheet Name: {{name}}</h1>
 <h2>{{topic}}</h2>
 <style>
@@ -41,11 +49,5 @@
     <p style="position: bottom: 0; width:100%; text-align: left">
         You got {{correctAnswerCount}} correct, out of {{noOfQuestions}}
         <br>
-        <button onclick="loadHome()">Return to Home</button>
     </p>
 </div>
-<script>
-    function loadHome() {
-        location.replace("/home")
-    }
-</script>

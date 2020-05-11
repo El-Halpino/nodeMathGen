@@ -34,7 +34,7 @@ router.get('/scores', function (request, response, next) {
         var type = "Teacher";
         userHelpers.findUsers(request, response, type, findWorksheets)
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 
 });
@@ -46,7 +46,7 @@ router.post('/scores', function (request, response, next) {
         console.log(user.userName);
         scoreHelpers.findScores(request, response, request.body.teacher, request.body.worksheetName, renderScores);// find score
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 });
 

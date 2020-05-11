@@ -48,4 +48,13 @@ router.get('/worksheet', function (request, response, next) {
   }
 });
 
+router.post('/worksheet', function (request, response, next) {
+  try {
+    request.session.worksheetLoaded = true;
+    mongoHelpers.findWorksheetBySearch(request, response, request.body.teacher, request.body.worksheetName, renderFuncNoWorksheet);
+  } catch (err) {
+    res.render("error", { message: "Error", error: err });
+  }
+})
+
 module.exports = router;

@@ -43,5 +43,34 @@ input[type=number] {
     margin: 20px;
 }
 
-
-  
+.NavBar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(2, 2, 2);
+}
+.NavBar 
+  li  { 
+    border-right: 2px solid white;
+    list-style-type: none;
+    float: left;
+}
+.NavBar li:last-child {
+  border-right: none;
+}
+.NavBar 
+li 
+a {
+  background-color: rgb(2, 2, 2);
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 28px 32px;
+  text-decoration: none;
+}
+.NavBar li a:hover {
+  background-color: rgb(126, 2, 2);
+}

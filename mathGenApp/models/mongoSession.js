@@ -5,7 +5,24 @@ var url = "mongodb://localhost:27017/";
 
 // Collection Worksheets
 
-let findWorksheet = function (workSheetID, callback, request, response) {
+let findWorksheetBySearch = function (request, response, teacher, worksheetName, callback) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("appDB");
+        var query = {author: teacher, name: worksheetName};
+        dbo.collection("worksheets").findOne(query, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            console.log(typeof (result));
+            db.close();
+            console.log(result, "Inside Function"); //object is ok
+            callback(request, response, result);
+        });
+    });
+}
+
+
+let findWorksheet = function (workSheetID, callback, request, response) { // Search By ID
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -54,16 +71,16 @@ let storeWorksheet = function (worksheetObj) {
     });
 }
 
-let deleteWorksheet = function (renderFuncNoWorksheet, response, worksheetID) { // NOT WORKING, wont delete
+let deleteWorksheet = function (renderFuncNoWorksheet, request, response, worksheetID) { // NOT WORKING, wont delete
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
         console.log(worksheetID)
-        dbo.collection("worksheets").deleteOne({"_id": ObjectId(worksheetID)}, function (err, obj) {
+        dbo.collection("worksheets").deleteOne({ "_id": ObjectId(worksheetID) }, function (err, obj) {
             if (err) throw err;
             console.log("1 worksheet deleted");
             db.close();
-            findWorksheetList(renderFuncNoWorksheet, response);
+            findWorksheetList(renderFuncNoWorksheet, request, response);
             return;
         });
     });
@@ -73,5 +90,6 @@ module.exports = {
     findWorksheet: findWorksheet,
     findWorksheetList: findWorksheetList,
     storeWorksheet: storeWorksheet,
-    deleteWorksheet: deleteWorksheet
+    deleteWorksheet: deleteWorksheet,
+    findWorksheetBySearch: findWorksheetBySearch
 };

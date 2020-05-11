@@ -1,6 +1,14 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/configWorksheet">configWorksheet</a> </li>
+    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
 <h1>{{title}}</h1>
 <p>
-    <form action="/configWorksheet">
+    <form action="/configWorksheet" method="POST">
         <label for="topics">Select Worksheet Topic:</label>
         <select id="topics" name="topics" required>
             <option value="Addition">Addition</option>
@@ -20,10 +28,4 @@
         <br>
         <input type="submit" value="Generate Worksheet">
     </form>
-    <button onclick="loadHome()">Home</button>
 </p>
-<script>
-    function loadHome() {
-        location.replace("/home")
-    }
-</script>

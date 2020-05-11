@@ -1,3 +1,11 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/configWorksheet">configWorksheet</a> </li>
+    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
 <h1>Worksheet Name: {{name}}</h1>
 <h2>{{topic}}</h2>
 <form action="/worksheet">
@@ -17,13 +25,3 @@
     </table>
     <input type="submit" value="Submit">
 </form>
-<button onclick="loadHome()">Home</button>
-<button onclick="loadWorksheetList()">View Worksheets</button>
-<script>
-    function loadHome() {
-        location.replace("/home")
-    }
-    function loadWorksheetList() {
-        location.replace("/viewWorksheets")
-    }
-</script>
