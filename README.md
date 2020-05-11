@@ -11,8 +11,10 @@
     1. Navigate to working directory ../nodeMathGen/mathGenApp <br>
     2. npm run start (use in terminal)
 
-
 4. How to run App in docker - <br>
     1. Navigate to directory containing the DockerFile.<br>
     1. docker build -t math-app . (use in terminal) <br>
-    2. docker run --rm -p 3000:3000 math-app (use in terminal)
+    2. docker run -d -p 3000:3000 --network host math-app (use in terminal)
+
+5. Navigate to http://localhost:3000/
+    1. Signup

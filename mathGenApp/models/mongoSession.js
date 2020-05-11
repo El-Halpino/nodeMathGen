@@ -59,7 +59,6 @@ let deleteWorksheet = function (renderFuncNoWorksheet, response, worksheetID) { 
         if (err) throw err;
         var dbo = db.db("appDB");
         console.log(worksheetID)
-        var objToDelete = { "_id": ObjectId(worksheetID) };
         dbo.collection("worksheets").deleteOne({"_id": ObjectId(worksheetID)}, function (err, obj) {
             if (err) throw err;
             console.log("1 worksheet deleted");

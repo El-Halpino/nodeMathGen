@@ -17,6 +17,8 @@ var storeDatatRouter = require('./routes/storeData');
 var viewWorksheetsRouter = require('./routes/viewWorksheets');
 var scoresRouter = require('./routes/scores');
 var myScoresRouter = require('./routes/myScores');
+var profileRouter = require('./routes/profile');
+var logoutRouter = require('./routes/logout');
 
 var app = express();
 
@@ -41,6 +43,8 @@ app.use('/', storeDatatRouter);
 app.use('/', viewWorksheetsRouter); 
 app.use('/', scoresRouter);
 app.use('/', myScoresRouter);
+app.use('/', profileRouter);
+app.use('/', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

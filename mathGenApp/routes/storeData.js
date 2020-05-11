@@ -6,10 +6,14 @@ const mongoHelpers = require("../models/mongoSession.js");
 
 /* GET storeData page. */
 router.get('/storeData', function (req, res, next) {
-    worksheetObj = req.session.mathGame;
-    console.log(worksheetObj);
-    mongoHelpers.storeWorksheet(worksheetObj); // Store Worksheet
-    res.redirect('/viewWorksheets');
+    try {
+        worksheetObj = req.session.mathGame;
+        console.log(worksheetObj);
+        mongoHelpers.storeWorksheet(worksheetObj); // Store Worksheet
+        res.redirect('/viewWorksheets');
+    } catch (err) {
+        res.render("error", { message: "Error", error: err });
+    }
 });
 
 module.exports = router;

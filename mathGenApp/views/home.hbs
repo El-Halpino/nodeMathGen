@@ -4,7 +4,8 @@
 <p><button onclick="loadConfigWorksheet()">Configure Worksheet</button>
     <button onclick="loadWorksheetList()">View Worksheets</button>
     <button onclick="loadScores()">View Scores</button>
-    <button onclick="loadMyScores()">View My Scores</button></p>
+    <button onclick="loadMyScores()">View My Scores</button>
+    <button onclick="loadProfile()">My profile</button></p>
 <p>
 </p>
 <script>
@@ -19,5 +20,8 @@
     }
     function loadMyScores() {
         location.replace("/myScores")
+    }
+    function loadProfile() {
+        location.replace("/profile")
     }
 </script>

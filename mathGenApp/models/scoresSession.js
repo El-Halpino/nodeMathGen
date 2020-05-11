@@ -8,8 +8,7 @@ let updateScore = async function (request, response, teacher, score, worksheetNa
         console.log(teacher, score, worksheetName, userName)
         var dbo = db.db("appDB");
         var myquery = { "teacher": teacher, "worksheetName": worksheetName, "userName": userName };
-        var newScore = { "score": score };
-        dbo.collection("scores").updateOne(myquery, { $set: newScore }, function (err, res) {
+        dbo.collection("scores").updateOne(myquery, { $set: { score: score } }, function (err, res) {
             if (err) throw err;
             console.log("1 score updated");
             db.close();
@@ -72,12 +71,12 @@ let findScores = function (request, response, teacher, worksheetName, callback) 
             console.log(JSON.stringify(result));
             console.log("SCORES FOUND");
             db.close();
-            callback(result, request,  response);
+            callback(result, request, response);
         })
     });
 }
 
-let findMyScore = function(response, studentName, callback) { //find current users scores
+let findMyScore = function (response, studentName, callback) { //find current users scores
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");

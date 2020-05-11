@@ -14,7 +14,7 @@ var redirectUser = (request, response, user, match) => {
             response.redirect("/home");
         } else if (user.type == "Student") {
             request.session.currentUser = user; // load user into cookie
-            response.redirect("/viewWorksheets");
+            response.redirect("/profile");
         } else {
             response.redirect("/signup");
         }
@@ -38,19 +38,22 @@ var checkIfValid = async (request, response, user, validStatus) => {
 
 /* GET login page. */
 router.get('/login', function (request, response, next) {
-    request.session.destroy();
-    response.render("login"); //Submit posts /login
+    try {
+        request.session.destroy();
+        response.render("login"); //Submit posts /login
+    } catch (err) {
+        res.render("error", { message: "Error", error: err });
+    }
 });
 
 router.post('/login', function (request, response, next) {
-    console.log(request.body);
-    userToCheck = request.body; // .body contains given login details
     try {
+        console.log(request.body);
+        userToCheck = request.body; // .body contains given login details
         userHelpers.findUser(request, response, userToCheck, checkIfValid); // Check if username is Valid (Stored Username)
     }
     catch (err) {
-        console.log("Error In User Validation");
-        response.redirect("/login");
+        res.render("error", { message: "Error", error: err });
     }
 });
 

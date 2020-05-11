@@ -4,9 +4,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/home', function (request, res, next) {
-  user = request.session.currentUser;
-  console.log("Weclome ", user.userName);
-  res.render("home", { title: "Home" , name: user.userName, type: user.type});
+  try {
+    user = request.session.currentUser;
+    console.log("Weclome ", user.userName);
+    res.render("home", { title: "Home", name: user.userName, type: user.type });
+  } catch (err) {
+    res.render("error", {message: "Error", error: err});
+  }
 });
 
 module.exports = router;

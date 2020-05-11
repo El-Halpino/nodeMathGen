@@ -1,0 +1,23 @@
+<h1>Profile Page For {{user.userName}}</h1>
+<p>Account Type : {{user.type}}<br>
+Email : {{user.email}}</p>
+<form action="/profile" method="POST">
+<input type="submit" Value="Delete Account" onclick="areYouSure()">
+</form>
+<button onclick="loadMyScores()">My Scores</button>
+<button onclick="loadHome()">home</button>
+<button onclick="logout()">Logout</button>
+<script>
+    function areYouSure() {
+        confirm("Are you sure? Your Account will be gone forever.");
+    }
+    function logout() {
+        location.replace("/logout");
+    }
+    function loadMyScores() {
+        location.replace("/myScores")
+    }
+    function loadHome() {
+        location.replace("/home")
+    }
+</script>

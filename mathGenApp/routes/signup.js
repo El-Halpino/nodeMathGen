@@ -19,8 +19,12 @@ var userIsValid = (request, response, user, validStatus) => {
 
 /* GET signup page. */
 router.get('/signup', (request, response, next) => {
-    request.session.destroy();
-    response.render('signup.hbs');
+    try {
+        request.session.destroy();
+        response.render('signup.hbs');
+    } catch (err) {
+        res.render("error", { message: "Error", error: err });
+    }
 });
 
 /* POST signup page. */
@@ -37,8 +41,7 @@ router.post('/signup', async (request, response) => {
         }
         userHelpers.checkUser(request, response, newUser, userIsValid);
     } catch (err) {
-        console.log("Error In Signup");
-        response.redirect("/signup");
+        res.render("error", { message: "Error", error: err });
     }
 })
 

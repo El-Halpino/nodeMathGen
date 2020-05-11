@@ -5,15 +5,25 @@ var router = express.Router();
 const scoreHelpers = require("../models/scoresSession.js");
 
 var renderMyScore = (response, myScores, user) => {
-    console.log(myScores, user);
-    response.render("myScores", {scores: myScores, username: user.userName});
+    try {
+        console.log(myScores, user);
+        response.render("myScores", { scores: myScores, username: user.userName });
+    } catch (err) {
+        res.render("error", { message: "Error", error: err });
+    }
+
 }
 
 /* GET scores page. */
 router.get('/myScores', function (request, response, next) {
-    user = request.session.currentUser;
-    scoreHelpers.findMyScore(response, user, renderMyScore);
-}); 
+    try {
+        user = request.session.currentUser;
+        scoreHelpers.findMyScore(response, user, renderMyScore);
+    } catch (err) {
+        res.render("error", { message: "Error", error: err });
+    }
+
+});
 
 
 module.exports = router;
