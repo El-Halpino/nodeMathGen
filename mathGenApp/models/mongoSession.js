@@ -21,7 +21,6 @@ let findWorksheetBySearch = function (request, response, teacher, worksheetName,
     });
 }
 
-
 let findWorksheet = function (workSheetID, callback, request, response) { // Search By ID
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;

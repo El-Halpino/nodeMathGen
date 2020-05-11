@@ -6,7 +6,12 @@ const mongoHelpers = require("../models/mongoSession.js")
 
 var renderFuncNoWorksheet = (result, request, response) => {
   console.log(result);
-  response.render("viewWorksheets", { worksheets: result });
+  user = request.session.currentUser;
+  if(user.type == "Student") {
+    response.render("studentViewWorksheets", { worksheets: result });
+  } else {
+    response.render("viewWorksheets", { worksheets: result });
+  }
 };
 
 /* GET viewWorksheets page. */

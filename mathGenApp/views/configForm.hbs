@@ -3,7 +3,6 @@
     <li><a href="/viewWorksheets">View Worksheets</a> </li>
     <li><a href="/configWorksheet">configWorksheet</a> </li>
     <li><a href="/scores">scores</a> </li>
-    <li><a href="/myScores">myScores</a> </li>
     <li><a href="/profile">Profile</a></li>
 </ul><br><br>
 <h1>{{title}}</h1>
@@ -25,6 +24,23 @@
         <br>
         <label for="max">Max Values Generated:</label>
         <input type="number" name="max" min="minV" max="1000" required>
+        <br>
+        <input type="submit" value="Generate Worksheet">
+    </form>
+</p>
+<br>
+<p>
+    <form action="/configWorksheet" method="POST">
+        <label for="topics">Worksheet Topic:</label>
+        <select id="topics" name="topics" required>
+            <option value="Quadratic">Quadratic Equations</option>
+        </select>
+        <br>
+        <label for="name">Worksheet Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label for="questions">Number of Questions:</label>
+        <input type="number" name="questions" min="1" max="25" required>
         <br>
         <input type="submit" value="Generate Worksheet">
     </form>

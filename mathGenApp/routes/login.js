@@ -14,7 +14,7 @@ var redirectUser = (request, response, user, match) => {
             response.redirect("/home");
         } else if (user.type == "Student") {
             request.session.currentUser = user; // load user into cookie
-            response.redirect("/profile");
+            response.redirect("/home");
         } else {
             response.redirect("/signup");
         }

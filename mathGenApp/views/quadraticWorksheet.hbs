@@ -7,20 +7,14 @@
 </ul><br><br>
 <h1>Worksheet Name: {{name}}</h1>
 <h2>{{topic}}</h2>
+<h3>Answer Format: First Box for + Second Box for - Answer</h3>
 <form action="/worksheet">
-    <table>
-        <tr>
-            <th>Operand1</th>
-            <th>Operand2</th>
-            <th>Answer</th>
-        </tr>
+    <ol>
         {{#each numberList}}
-        <tr>
-            <td>{{this.randomNumber1}}</td>
-            <td>{{this.randomNumber2}}</td>
-            <td><input name="answer_{{this.index}}" type="number" step="0.001"></input></td>
-        </tr>
+        <li>{{this.randomNumber1}}x<sup>2</sup> + {{this.randomNumber2}}x + {{this.randomNumber3}} = 0</li>
+        <input name="answer_{{this.index}}" type="number" step="0.001"></input>
+        <input name="answer2_{{this.index}}" type="number" step="0.001"></input>
         {{/each}}
-    </table>
+    </ol>
     <input type="submit" value="Submit">
 </form>

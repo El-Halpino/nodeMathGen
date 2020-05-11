@@ -1,3 +1,27 @@
+//Quadratic Equations
+let createQuadraticQuestions = function (options) {
+  var newMathGame = {
+    title: options["topic"],
+    name: options["name"],
+    author: options["author"],
+    numberList: []
+  }
+  for (var i = 0; i < options["noOfQuestions"]; i++) {
+    newMathGame.numberList.push({
+      index: i,
+      randomNumber1: Math.round(Math.random() * 6), // Random Numbers assigned an index, pushed into List
+      randomNumber2: Math.round(Math.random() * 30),
+      randomNumber3: Math.round(Math.random() * 150),
+    });
+  }
+  return newMathGame;
+}
+
+let checkQuadraticAnswers = function (worksheet, answers) {
+
+}
+
+//Simple Topics
 let createMathObj = function (options) { // topic , name, noOfQuestions, maxValue
   var newMathGame = {
     title: options["topic"],
@@ -49,12 +73,17 @@ let checkAnswers = function (workSheet, answers) {
     if (operators[workSheet.topic](op1, op2) == answerToCheck) { // check if results matches user answer
       worksheetDetails.correctAnswerCount++; //increment count
     }
-    worksheetDetails.calculatedAnswers.push({ answer: operators[workSheet.topic](op1, op2) });
+    var ans = operators[workSheet.topic](op1, op2);
+    var limit = ans.toFixed(3);
+    var finalAns = parseInt(limit, 10);
+    worksheetDetails.calculatedAnswers.push({ answer: finalAns });
   } //loop
   return worksheetDetails;
 }
 
 module.exports = {
   createMathObj: createMathObj,
-  checkAnswers: checkAnswers
+  checkAnswers: checkAnswers,
+  createQuadraticQuestions: createQuadraticQuestions,
+  checkQuadraticAnswers: checkQuadraticAnswers
 };

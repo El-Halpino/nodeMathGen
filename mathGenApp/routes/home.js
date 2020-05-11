@@ -6,10 +6,15 @@ var router = express.Router();
 router.get('/home', function (request, res, next) {
   try {
     user = request.session.currentUser;
-    console.log("Weclome ", user.userName);
-    res.render("home", { title: "Home", name: user.userName, type: user.type });
+    if (user.type == "Student") {
+      console.log("Weclome ", user.userName);
+      res.render("studentHome", { title: "Home", name: user.userName, type: user.type });
+    } else {
+      console.log("Weclome ", user.userName);
+      res.render("home", { title: "Home", name: user.userName, type: user.type });
+    }
   } catch (err) {
-    res.render("error", {message: "Error", error: err});
+    res.render("error", { message: "Error", error: err });
   }
 });
 

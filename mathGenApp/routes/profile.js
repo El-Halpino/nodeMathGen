@@ -8,22 +8,15 @@ const userHelpers = require("../models/userSession.js");
 router.get('/profile', function (request, res, next) {
   try {
     user = request.session.currentUser;
-    console.log("Weclome ", user.userName);
-    res.render("profile",{user: user});
+    if (user.type == "Student") {
+      res.render("studentProfile", { user: user });
+    } else {
+      console.log("Weclome ", user.userName);
+      res.render("profile", { user: user });
+    }
   } catch (err) {
-    res.render("error", {message: "Error", error: err});
+    res.render("error", { message: "Error", error: err });
   }
 });
-
-/* POST Profile page. */
-router.post('/profile', function (request, res, next) { // create a class
-    try {
-      user = request.session.currentUser;
-
-        
-    } catch (err) {
-      res.render("error", {message: "Error", error: err});
-    }
-  });
 
 module.exports = router;
