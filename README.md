@@ -4,17 +4,18 @@
     1. [Install Docker Here](https://docs.docker.com/get-docker/) <br>
 
 2. How to start MonogDB with Docker - <br>
-    1. mkdir ~/data (First Time) (use in terminal root)<br>
-    2. sudo docker run -d -p 27017:27017 -v ~/data:/data/db mongo (use in terminal)
+    1. Navigate to root of terminal.<br>
+     $ mkdir ~/data<br>
+     $ sudo docker run -d -p 27017:27017 -v ~/data:/data/db mongo 
     
 3. How to run App locally - <br>
     1. Navigate to working directory ../nodeMathGen/mathGenApp <br>
-    2. npm run start (use in terminal)
+    $ npm run start
 
 4. How to run App in docker - <br>
     1. Navigate to directory containing the DockerFile.<br>
-    1. docker build -t math-app . (use in terminal) <br>
-    2. docker run -d -p 3000:3000 --network host math-app (use in terminal)
+     $ docker build -t math-app . <br> 
+     $ docker run -d -p 3000:3000 --network host math-app
 
 5. Navigate to http://localhost:3000/
     1. Signup
