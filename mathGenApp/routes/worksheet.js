@@ -28,19 +28,20 @@ var renderFuncNoWorksheet = (request, response, worksheet) => { // render the wo
 var renderResultsFunc = (request, response, saveTheScore) => { // render results
   worksheetDetails = request.session.worksheetDetails
   user = request.session.currentUser;
-  if (user.type == "Student") {
-    if (saveTheScore == true) {
-      workSheet = request.session.currentWorksheet;
-      scoreHelpers.saveScore(workSheet.author, worksheetDetails.correctAnswerCount, worksheetDetails.name, user.userName);
-      response.render("studentResults", worksheetDetails);
-    } else {
-      response.render("studentResults", worksheetDetails);
-    }
-  } else {
-    if (saveTheScore == true) {
-      workSheet = request.session.currentWorksheet;
-      scoreHelpers.saveScore(workSheet.author, worksheetDetails.correctAnswerCount, worksheetDetails.name, user.userName);
-      response.render("result", worksheetDetails);
+  workSheet = request.session.currentWorksheet;
+  if (user.type == "Student" && saveTheScore == true && worksheetDetails.topic == "Quadratic") {
+    scoreHelpers.saveScore(workSheet.author, worksheetDetails.correctAnswerCount, worksheetDetails.name, user.userName);
+    response.render("quadraticResults", worksheetDetails);
+  } else if (user.type == "Student" && saveTheScore == true && worksheetDetails.topic != "Quadratic") {
+    scoreHelpers.saveScore(workSheet.author, worksheetDetails.correctAnswerCount, worksheetDetails.name, user.userName);
+    response.render("studentResults", worksheetDetails);
+  } else if (user.type == "Student" && saveTheScore == false && worksheetDetails.topic == "Quadratic") {
+    response.render("quadraticResults", worksheetDetails);
+  } else if (user.type == "Student" && saveTheScore == false && worksheetDetails.topic != "Quadratic") {
+    response.render("studentResults", worksheetDetails);
+  } else { //Teacher Dont Save Score
+    if (worksheetDetails.topic == "Quadratic") {
+      response.render("quadraticResults", worksheetDetails);
     } else {
       response.render("result", worksheetDetails);
     }
@@ -56,7 +57,7 @@ router.get('/worksheet', function (request, response, next) {
       console.log("ANSWERS", answers);
       if (workSheet.topic == "Quadratic") {
         var worksheetDetails = mathHelpers.checkQuadraticAnswers(workSheet, answers);
-      } else {
+      } else { // The other topics..
         var worksheetDetails = mathHelpers.checkAnswers(workSheet, answers);
       }
       console.log("Worksheet Details", worksheetDetails);

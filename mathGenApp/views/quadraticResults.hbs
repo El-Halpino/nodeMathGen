@@ -1,0 +1,29 @@
+<ul class="NavBar">
+    <li><a href="/home">home</a></li>
+    <li><a href="/viewWorksheets">View Worksheets</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
+    <li><a href="/profile">Profile</a></li>
+</ul><br><br>
+<h1>Worksheet Name: {{name}}</h1>
+<h2>{{topic}} Equations</h2>
+<ol>
+    <h3>Questions</h3>
+    {{#each questions}}
+    <li>{{this.randomNumber1}}x<sup>2</sup> + {{this.randomNumber2}}x - {{this.randomNumber3}} = 0</li>
+    {{/each}}
+</ol>
+<ol>
+    <h3>Calculated Answers</h3>
+    {{#each calculatedAnswers}}
+    <li>Positive Root: {{this.answerPlus}}<br>
+        Negative Root: {{this.answerNeg}}</li>
+    {{/each}}
+</ol>
+<ol>
+    <h3>User Answers</h3>
+    {{#each userAnswers}}
+    <li>Positive Root: {{this.answerPlus}}<br>
+        Negative Root: {{this.answerNeg}}</li>
+    {{/each}}
+</ol>
+<h3>You got {{correctAnswerCount}} / {{noOfQuestions}}</h3>

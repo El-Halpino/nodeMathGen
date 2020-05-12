@@ -5,12 +5,16 @@ var router = express.Router();
 const mongoHelpers = require("../models/mongoSession.js")
 
 var renderFuncNoWorksheet = (result, request, response) => {
-  console.log(result);
-  user = request.session.currentUser;
-  if(user.type == "Student") {
-    response.render("studentViewWorksheets", { worksheets: result });
-  } else {
-    response.render("viewWorksheets", { worksheets: result });
+  try {
+    console.log(result);
+    user = request.session.currentUser;
+    if (user.type == "Student") {
+      response.render("studentViewWorksheets", { worksheets: result });
+    } else {
+      response.render("viewWorksheets", { worksheets: result });
+    }
+  } catch (err) {
+    response.render("error", { message: "Error", error: err });
   }
 };
 

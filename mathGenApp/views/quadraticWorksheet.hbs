@@ -1,19 +1,18 @@
 <ul class="NavBar">
     <li><a href="/home">home</a></li>
     <li><a href="/viewWorksheets">View Worksheets</a> </li>
-    <li><a href="/configWorksheet">configWorksheet</a> </li>
-    <li><a href="/scores">scores</a> </li>
+    <li><a href="/myScores">myScores</a> </li>
     <li><a href="/profile">Profile</a></li>
 </ul><br><br>
 <h1>Worksheet Name: {{name}}</h1>
-<h2>{{topic}}</h2>
-<h3>Answer Format: First Box for + Second Box for - Answer</h3>
+<h2>{{topic}} Equations</h2>
+<h3>Answer Format: <br> First Box for Positive Root, Second Box for Negative Root<br> Limit your answers to 6 decimal places</h3>
 <form action="/worksheet">
     <ol>
         {{#each numberList}}
-        <li>{{this.randomNumber1}}x<sup>2</sup> + {{this.randomNumber2}}x + {{this.randomNumber3}} = 0</li>
-        <input name="answer_{{this.index}}" type="number" step="0.001"></input>
-        <input name="answer2_{{this.index}}" type="number" step="0.001"></input>
+        <li>{{this.randomNumber1}}x<sup>2</sup> + {{this.randomNumber2}}x - {{this.randomNumber3}} = 0</li>
+        <input name="answerPlus_{{this.index}}" type="number" step="0.000001"></input>
+        <input name="answerNeg_{{this.index}}" type="number" step="0.000001"></input>
         {{/each}}
     </ol>
     <input type="submit" value="Submit">
