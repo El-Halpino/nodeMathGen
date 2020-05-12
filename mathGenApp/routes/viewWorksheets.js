@@ -32,7 +32,7 @@ router.get('/viewWorksheets', function (request, response, next) {
 router.post('/viewWorksheets', async function (request, response, next) { // Post is used to delete worksheets
   try {
     worksheetID = request.body._id;
-    console.log("HERE", worksheetID);
+    console.log(worksheetID);
     mongoHelpers.deleteWorksheet(renderFuncNoWorksheet, request, response, worksheetID); // Delete Function
   } catch (err) {
     response.render("error", { message: "Error", error: err });

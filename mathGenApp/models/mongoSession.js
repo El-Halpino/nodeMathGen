@@ -5,11 +5,11 @@ var url = "mongodb://localhost:27017/";
 
 // Collection Worksheets
 
-let findWorksheetBySearch = function (request, response, teacher, worksheetName, callback) {
+let findWorksheetBySearch = function (request, response, teacher, worksheetName, callback) { // Search by author and worksheetName
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
-        var query = {author: teacher, name: worksheetName};
+        var query = { author: teacher, name: worksheetName };
         dbo.collection("worksheets").findOne(query, function (err, result) {
             if (err) throw err;
             console.log(result);
@@ -21,14 +21,14 @@ let findWorksheetBySearch = function (request, response, teacher, worksheetName,
     });
 }
 
-let findWorksheet = function (workSheetID, callback, request, response) { // Search By ID
+let findWorksheet = function (workSheetID, callback, request, response) {// Search By ID
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
         var query = { "_id": ObjectId(workSheetID._id) };
         dbo.collection("worksheets").find(query).toArray(function (err, result) {
             if (err) throw err;
-            console.log(result[0].name);
+            console.log(result[0]);
             console.log(typeof (result));
             db.close();
             var worksheetObj = {
@@ -43,7 +43,7 @@ let findWorksheet = function (workSheetID, callback, request, response) { // Sea
     });
 }
 
-let findWorksheetList = function (callback, request, response) {
+let findWorksheetList = function (callback, request, response) { // find all worksheets and return array of worksheets
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
@@ -51,12 +51,16 @@ let findWorksheetList = function (callback, request, response) {
             if (err) throw err;
             console.log(JSON.stringify(result));
             db.close();
+            console.log("Worksheets Found");
             callback(result, request, response);
         })
     });
 }
 
 let storeWorksheet = function (worksheetObj) {
+    if (worksheetObj == undefined) {
+        throw worksheetObj;
+    }
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");

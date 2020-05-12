@@ -7,6 +7,9 @@ const mathHelpers = require("../models/worksheetSession.js");
 /* GET ConfigWorksheet page. */
 router.get('/configWorksheet', function (req, res, next) {
   try {
+    if (req.session.currentUser == undefined) {
+      throw "User not Logged In";
+    }
     res.render("configForm", { title: "Worksheet Configuration" });
   } catch (err) {
     res.render("error", { message: "Error", error: err });

@@ -9,9 +9,9 @@ let createQuadraticQuestions = function (options) {
   for (var i = 0; i < options["noOfQuestions"]; i++) {
     newMathGame.numberList.push({
       index: i, // Random Numbers assigned an index, pushed into List
-      randomNumber1: Math.round(Math.random() * 6) + 1, // First value cannot be 0
-      randomNumber2: Math.round(Math.random() * 30),
-      randomNumber3: Math.round(Math.random() * 150),
+      randomNumber1: Math.round(Math.random() * 6) + 1, // X squared coefficient cannot be 0 so +1
+      randomNumber2: Math.round(Math.random() * 30), // X coefficient  
+      randomNumber3: Math.round(Math.random() * 150), // Constant 
     });
   }
   return newMathGame;

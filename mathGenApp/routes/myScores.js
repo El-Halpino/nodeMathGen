@@ -9,7 +9,7 @@ var renderMyScore = (response, myScores, user) => {
         console.log(myScores, user);
         response.render("myScores", { scores: myScores, username: user.userName });
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 
 }
@@ -20,7 +20,7 @@ router.get('/myScores', function (request, response, next) {
         user = request.session.currentUser;
         scoreHelpers.findMyScore(response, user, renderMyScore);
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 
 });

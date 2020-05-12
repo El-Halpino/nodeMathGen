@@ -23,7 +23,7 @@ router.get('/signup', (request, response, next) => {
         request.session.destroy();
         response.render('signup.hbs');
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 });
 
@@ -41,7 +41,7 @@ router.post('/signup', async (request, response) => {
         }
         userHelpers.checkUser(request, response, newUser, userIsValid);
     } catch (err) {
-        res.render("error", { message: "Error", error: err });
+        response.render("error", { message: "Error", error: err });
     }
 })
 

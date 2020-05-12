@@ -76,7 +76,10 @@ let findScores = function (request, response, teacher, worksheetName, callback) 
     });
 }
 
-let findMyScore = function (response, studentName, callback) { //find current users scores
+let findMyScore = function (response, studentName, callback) {//find current users scores
+    if (studentName == undefined) {
+        throw studentName;
+    }
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("appDB");
