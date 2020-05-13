@@ -1,7 +1,7 @@
 //Quadratic Equations
 let createQuadraticQuestions = function (options) {
   var newMathGame = {
-    title: options["topic"],
+    topic: options["topic"],
     name: options["name"],
     author: options["author"],
     numberList: []

@@ -21,7 +21,7 @@ router.post('/generateWorksheet', function (req, res, next) {
         if (req.session.pageLoaded == undefined) {
             req.session.pageLoaded = true;
             var options = req.body;
-            if (options.topics == "Quadratic") { // Quadratic Topic
+            if (options.topics === "Quadratic") { // Quadratic Topic
                 var worksheetOptions = {
                     topic: options.topics,
                     name: options.name,
@@ -53,7 +53,7 @@ router.post('/generateWorksheet', function (req, res, next) {
             console.log("Answers", answers);
             worksheet = req.session.thisWorksheet;
             console.log(worksheet);
-            if (worksheet.title == "Quadratic") {
+            if (worksheet.topic === "Quadratic") {
                 var worksheetDetails = mathHelpers.checkQuadraticAnswers(worksheet, answers);
                 res.render("quadraticResults", worksheetDetails);
             } else {
