@@ -59,7 +59,7 @@ let checkQuadraticAnswers = function (worksheet, answers) {
 //Simple Topics
 let createMathObj = function (options) { // topic , name, noOfQuestions, maxValue
   var newMathGame = {
-    title: options["topic"],
+    topic: options["topic"],
     name: options["name"],
     author: options["author"],
     numberList: [] //initialise list

@@ -8,7 +8,7 @@
 <h1>Worksheet Name: {{name}}</h1>
 <h2>{{topic}} Equations</h2>
 <h3>Answer Format: <br> First Box for Positive Root, Second Box for Negative Root<br> Limit your answers to 6 decimal places</h3>
-<form action="/worksheet">
+<form action="/generateWorksheet" method="POST">
     <ol>
         {{#each numberList}}
         <li>{{this.randomNumber1}}x<sup>2</sup> + {{this.randomNumber2}}x - {{this.randomNumber3}} = 0</li>

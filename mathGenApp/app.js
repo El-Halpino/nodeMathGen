@@ -19,6 +19,7 @@ var scoresRouter = require('./routes/scores');
 var myScoresRouter = require('./routes/myScores');
 var profileRouter = require('./routes/profile');
 var logoutRouter = require('./routes/logout');
+var generateWorksheetRouter = require('./routes/generateWorksheet');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/', scoresRouter);
 app.use('/', myScoresRouter);
 app.use('/', profileRouter);
 app.use('/', logoutRouter);
+app.use('/', generateWorksheetRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
