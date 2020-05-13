@@ -53,7 +53,7 @@ router.post('/generateWorksheet', function (req, res, next) {
             console.log("Answers", answers);
             worksheet = req.session.thisWorksheet;
             console.log(worksheet);
-            if (worksheet.title == "Quadratic") {
+            if (worksheet.topic == "Quadratic") {
                 var worksheetDetails = mathHelpers.checkQuadraticAnswers(worksheet, answers);
                 res.render("quadraticResults", worksheetDetails);
             } else {
