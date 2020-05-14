@@ -14,7 +14,7 @@
         <li>{{this.userName}}</li>
         {{/each}}
     </ol>
-    Worksheet Names; 
+    Worksheet Names;
     <ol>
         {{#each worksheets}}
         <li>{{this.name}} <br> by {{this.author}}</li>
@@ -34,14 +34,16 @@
     <br>
 </p>
 <h2>Scores</h2>
-<h3>Search Results</h3>
-<p>
-    <ol>
-        {{#each scores}}
-        <li>Worksheet Name: {{this.worksheetName}}<br>
-            Worksheet Author: {{this.teacher}}<br>
-            Student Name: {{this.userName}}<br>
-            Score: {{this.score}}</li><br>
-        {{/each}}
-    </ol>
-</p>
+<div class="scores">
+    <h3>Search Results</h3>
+    <p>
+        <ol>
+            {{#each scores}}
+            <li>Worksheet Name: {{this.worksheetName}}<br>
+                Worksheet Author: {{this.teacher}}<br>
+                Student Name: {{this.userName}}<br>
+                Score: {{this.score}}</li><br>
+            {{/each}}
+        </ol>
+    </p>
+</div>

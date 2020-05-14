@@ -48,16 +48,19 @@ router.post('/generateWorksheet', function (req, res, next) {
             }
         } else { // Page has been loaded Check Answers
             console.log("Check Answers");
-            delete req.session.pageLoaded;
             answers = req.body;
             console.log("Answers", answers);
             worksheet = req.session.thisWorksheet;
             console.log(worksheet);
             if (worksheet.topic === "Quadratic") {
                 var worksheetDetails = mathHelpers.checkQuadraticAnswers(worksheet, answers);
+                delete req.session.pageLoaded;
+                delete req.session.thisWorksheet;
                 res.render("quadraticResults", worksheetDetails);
             } else {
                 var worksheetDetails = mathHelpers.checkAnswers(worksheet, answers);
+                delete req.session.pageLoaded;
+                delete req.session.thisWorksheet;
                 res.render("studentResults", worksheetDetails);
             }
         }

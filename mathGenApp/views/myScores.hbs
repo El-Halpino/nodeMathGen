@@ -6,14 +6,16 @@
     <li><a href="/profile">Profile</a></li>
 </ul><br><br>
 <h2>Scores</h2>
-<h3>Score Results for {{username}}</h3>
-<p>
-    <ol>
-        {{#each scores}}
-        <li>Worksheet Name: {{this.worksheetName}}<br>
-            Worksheet Author: {{this.teacher}}<br>
-            Student Name: {{this.userName}}<br>
-            Score: {{this.score}}</li><br>
-        {{/each}}
-    </ol>
-</p>
+<div class="scores">
+    <h3>Score Results for {{username}}</h3>
+    <p>
+        <ol>
+            {{#each scores}}
+            <li>Worksheet Name: {{this.worksheetName}}<br>
+                Worksheet Author: {{this.teacher}}<br>
+                Student Name: {{this.userName}}<br>
+                Score: {{this.score}}</li><br>
+            {{/each}}
+        </ol>
+    </p>
+</div>

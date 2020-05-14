@@ -44,13 +44,26 @@ input[type=number] {
 }
 
 .info {
-  background-color: rgba(211, 211, 211, 0.37);
+    background-color: rgba(211, 211, 211, 0.37);
     width: 300px;
     border: 10px solid black;
     padding: 30px;
     margin: 20px;
 }
-
+.worksheets {
+    background-color: rgba(211, 211, 211, 0.37);
+    width: 300px;
+    border: 10px solid black;
+    padding: 30px;
+    margin: 20px;
+}
+.scores {
+    background-color: rgba(211, 211, 211, 0.37);
+    width: 300px;
+    border: 10px solid black;
+    padding: 30px;
+    margin: 20px;
+}
 .NavBar {
     position: fixed;
     top: 0;

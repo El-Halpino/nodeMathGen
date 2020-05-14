@@ -8,25 +8,27 @@
 <h1>Worksheets</h1>
 <h3>Search For Worksheet</h3>
 <form action="/worksheet" method="POST">
-        <label for="teacher">Enter Teacher Name: </label>
-        <input type="text" name="teacher" required>
-        <br>
-        <label for="worksheetName">Enter Worksheet Name: </label>
-        <input type="text" name="worksheetName" required>
-        <br>
-        <input type="submit" value="Find Worksheet">
-    </form>
-<p>
+    <label for="teacher">Enter Teacher Name: </label>
+    <input type="text" name="teacher" required>
+    <br>
+    <label for="worksheetName">Enter Worksheet Name: </label>
+    <input type="text" name="worksheetName" required>
+    <br>
+    <input type="submit" value="Find Worksheet">
+</form>
+<div class="worksheets">
     <h3>All Worksheets</h3>
-    <ol>
-        {{#each worksheets}}
-        <li>Worksheet Name: {{this.name}}<br>
-            Worksheet Author: {{this.author}}<br>
-            Worksheet Topic: {{this.topic}}<br>
-        Worksheet ID: {{this._id}} 
-        <form action="/worksheet">
-            <button name="_id" type="submit" value={{this._id}}>Render Worksheet</button>
-        </form>
-        {{/each}}
-    </ol>
-</p>
+    <p>
+        <ol>
+            {{#each worksheets}}
+            <li>Worksheet Name: {{this.name}}<br>
+                Worksheet Author: {{this.author}}<br>
+                Worksheet Topic: {{this.topic}}<br>
+                Worksheet ID: {{this._id}}
+                <form action="/worksheet">
+                    <button name="_id" type="submit" value={{this._id}}>Render Worksheet</button>
+                </form>
+                {{/each}}
+        </ol>
+    </p>
+</div>

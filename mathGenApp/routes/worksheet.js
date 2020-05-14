@@ -6,22 +6,27 @@ const mathHelpers = require("../models/worksheetSession.js");
 const mongoHelpers = require("../models/mongoSession.js");
 const scoreHelpers = require("../models/scoresSession.js");
 
-var renderFuncNoWorksheet = (request, response, worksheet) => { // render the worksheet
-  console.log(worksheet);
-  request.session.currentWorksheet = worksheet;
-  user = request.session.currentUser;
-  if (user.type == "Student") {
-    if (worksheet.topic == "Quadratic") {
-      response.render("quadraticWorksheet", worksheet);
+var renderFuncNoWorksheet = (request, response, worksheet) => {
+  try {
+    // render the worksheet
+    console.log(worksheet);
+    request.session.currentWorksheet = worksheet;
+    user = request.session.currentUser;
+    if (user.type == "Student") {
+      if (worksheet.topic == "Quadratic") {
+        response.render("quadraticWorksheet", worksheet);
+      } else {
+        response.render("studentWorksheet", worksheet);
+      }
     } else {
-      response.render("studentWorksheet", worksheet);
+      if (worksheet.topic == "Quadratic") {
+        response.render("quadraticWorksheet", worksheet);
+      } else {
+        response.render("worksheet", worksheet);// render normal worksheet
+      }
     }
-  } else {
-    if (worksheet.topic == "Quadratic") {
-      response.render("quadraticWorksheet", worksheet);
-    } else {
-      response.render("worksheet", worksheet);// render normal worksheet
-    }
+  } catch (err) {
+    response.render("error", { message: "Error", error: err });
   }
 };
 
