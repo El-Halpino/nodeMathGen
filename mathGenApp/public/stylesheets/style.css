@@ -43,6 +43,14 @@ input[type=number] {
     margin: 20px;
 }
 
+.info {
+  background-color: rgba(211, 211, 211, 0.37);
+    width: 300px;
+    border: 10px solid black;
+    padding: 30px;
+    margin: 20px;
+}
+
 .NavBar {
     position: fixed;
     top: 0;
